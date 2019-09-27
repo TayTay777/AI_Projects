@@ -1,19 +1,11 @@
-<<<<<<< HEAD
 
+public class Baggins {
 
+    public Baggins() {
 
-public Baggins (){
+    }
 
-
-
-
-
-
-   
-}
-
-
-pulic class groceries(){
+    public class groceries{
 
     vector<sack> = sacks;
     ArrayList<Item> unpackedItems;
@@ -31,10 +23,5 @@ pulic class groceries(){
         for (int x = 0; x < numSacks; x++) sacks.add(new Bag(0));
     }
 
-}
-
-=======
-public static void main(string[] args){
-    
->>>>>>> 6c0b707c8701c5739f3d61c09dc8d390b6be697e
+    }
 }
