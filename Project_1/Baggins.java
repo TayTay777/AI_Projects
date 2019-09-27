@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -32,4 +33,8 @@ pulic class groceries(){
 
 }
 
+=======
+public static void main(string[] args){
+    
+>>>>>>> 6c0b707c8701c5739f3d61c09dc8d390b6be697e
 }
