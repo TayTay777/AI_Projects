@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
+import sun.misc.Queue;
+
 public class Baggins {
 
     File file; // taking in contents of cart and restrictions
@@ -11,6 +13,43 @@ public class Baggins {
     public Baggins(File file) {
         this.file = file;
     }
+    public interface storage{
+        public Cart get();
+        public void put(Cart s);
+        public boolean isEmpty();
+    }
+    /**
+     * implementation of data storage via stack
+     */
+    public class stackStorage implements storage{
+        Stack<Cart> stack = new Stack<Cart>();
+        
+        public Cart get(){
+            stack.pop();
+        }
+        public void put(Cart s){
+            stack.push(s);
+        }
+        public boolean isEmpty(){
+            return stack.isEmpty();
+        }
+    }
+    /**
+     * implementation of data storage via queue
+     */
+    public class queueStoage implements storage{
+        Queue<Cart> queue = new Queue<Cart>();
+        
+        public Cart get(){
+            queue.dequeue();
+        }
+        public void put(Cart s){
+            queue.enqueue(s);
+        }
+        public boolean isEmpty(){
+            return queue.isEmpty();
+        }
+    }
 
     /***
      * Depth first search to find solution to the bagging problem
@@ -19,12 +58,15 @@ public class Baggins {
      */
 
     private Cart DFS(Cart s) {
-        // start state = all empty bags , all groceries
-        // transition state = placing each item into a bag if it fits
-        // goal state = all full bags, no more groceries
-        // search goes down each node until solution is found
+     
 
         // initialize the data store with s
+        storage dfs;
+        dfs.add(s);
+
+        while(!dfs.isEmpty()){
+            
+        }
 
         // while data store has stuff in it:
 
