@@ -53,21 +53,35 @@ public class Baggins {
         Vector<sack> sacks;
         ArrayList<item> unpackedItems;
 
-        public Cart(ArrayList<item> items, int numSacks) {
+        public Cart(ArrayList<item> items, int numSacks, int maxSackSize) {
             unpackedItems = new ArrayList<item>(items);
             sacks = new Vector<sack>(numSacks);
-            for (int x = 0; x < numSacks; x++)
-                sacks.add(new sack(0));
+            for (int i = 0; i < numSacks; i++)
+                sacks.add(new sack(maxSackSize));
         }
 
 
         //Tries to add an item to specified sack
         //if it cannot fit, returns false, else returns true
         boolean addItem(int sackNum, item item) {
-            if (item.itemSize > sacks.get(sackNum).openSpace) {
-                return false;
-            } else
-                return true;
+
+            boolean canMix = false;
+            for (int i = 0; i <  sacks.get(sackNum).contents.size(); i++){
+                if (sacks.get(sackNum).contents.get(i).checkCompatible(item.name) == false){
+                    break;
+                }
+                else canMix = true;
+            }
+
+
+            if (canMix){
+                if (item.itemSize <= sacks.get(sackNum).openSpace) {
+                    return false;
+                } else
+                    return true;
+            }
+            else return false;
+
         }
 
         // This will print one solution
