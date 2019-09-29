@@ -12,10 +12,35 @@ public class Baggins {
     }
 
     /***
-     * 
+     * Depth first search to find solution to the bagging problem
+     * @return "optimal" solution
      */
     
-    void DFS(){
+    private Cart DFS(Cart s){
+       //start state = all empty bags , all groceries
+       //transition state = placing each item into a bag if it fits
+       //goal state = all full bags, no more groceries 
+        //search goes down each node until solution is found 
+
+        //initialize the data store with s
+         
+
+        //while data store has stuff in it:
+        
+        //pull next solution s from data store
+        
+		//check it for being bad state, if so continue	
+		//check it for being  a goal state, if yes return
+        
+        //if it isn’t 
+        //need to expand storage — 
+        //grab next unpacked item, 
+        //remove it from unpacked item list
+        //for each bag, make a copy of the solution state, and pack the item in it , 
+        //if no constraints are violated and then place it in data structure
+
+
+        
 
     }
 
@@ -28,12 +53,12 @@ public class Baggins {
 
     //TO DO: groceries class now needs to fit the 
     //new classes below: item, items, and sack
-    public class groceries {
+    public class Cart {
 
         Vector<sack> sacks;
         ArrayList<Item> unpackedItems;
 
-        public groceries(groceries s) {
+        public Cart(Cart s) {
             sacks = new Vector<sack>(); //initiallizing vector
            
             for (sack i : s.sacks)
@@ -41,11 +66,11 @@ public class Baggins {
             upackedItems = new ArrayList<Item>(s.unpackedItems);
         }
 
-        public groceries() {
+        public Cart() {
             unpackedItems = new ArrayList<Item>(items.values());
-            sacks = new Vector<Bag>(numBags);
+            sacks = new Vector<Bag>(numSacks);
             for (int x = 0; x < numSacks; x++)
-                sacks.add(new Bag(0));
+                sacks.add(new sack(0));
         }
 
         //This will print one solution
@@ -83,7 +108,7 @@ public class Baggins {
      * an array list of multiple item objects that include their individual
      * constraints, names, and weights.
      * 
-     * @returns Items ArrayList
+     * @return Items ArrayList
      */
 
     public class items {
@@ -107,7 +132,7 @@ public class Baggins {
             // Gets all the groceries items for reference
             ArrayList<String> baseItems = new ArrayList<String>();
             // Scans past the # of bags and max bag size
-            
+
             numSacks = fileScan.nextLine(); //setting number of sacks
             sackSize = fileScan.nextLine(); //setting size of each bag
 
@@ -186,6 +211,10 @@ public class Baggins {
         void addItem(item item) {
             contents.add(item);
             openSpace = openSpace - item.itemSize;
+        }
+        //returns size of current bag
+        public int getSize(){
+            return sack.maxSize();
         }
 
         //allows program to initially check if the item
