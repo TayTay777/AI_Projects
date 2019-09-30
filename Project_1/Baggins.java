@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.Queue;
-
+import java.util.Stack;
 
 public class Baggins {
 
@@ -13,89 +13,53 @@ public class Baggins {
 		this.file = file;
 	}
 
-	// public interface storage {
-	//     public Cart get();
+	void DFS() {
 
-	//     public void put(Cart s);
+		Items dfsItems = new Items(file);
+		ArrayList<Item> items = dfsItems.createItems();
+		int numSacks = dfsItems.numSacks;
 
-	//     public boolean isEmpty();
-	// }
 
-	// /**
-	//  * implementation of data storage via stack
-	//  */
+		Cart dfsCart = new Cart(items, numSacks, dfsItems.sackSize);
+        Stack<Cart> dfsStack = new Stack<Cart>();
+        
+        for (int i = 0; i < dfsCart.sacks.size(); i++){
+			Cart startCart = new Cart(items, numSacks, dfsItems.sackSize);
 
-	// public class stackStorage implements storage {
-	//     Stack<Cart> stack = new Stack<Cart>();
+			if (startCart.addItem(i, items.get(items.size()-1))){
+				dfsStack.push(startCart);
+			}
+		}
 
-	//     public Cart get() {
-	//         stack.pop();
-	//     }
+        while(!dfsStack.isEmpty()){
+            for (int i = 0; i < dfsCart.sacks.size(); i++){
+                Cart sCart = dfsStack.peek(); //getting top cart
+			    Cart newCart = new Cart(items, numSacks, dfsItems.sackSize);
+                //solution found get out
+                if (sCart.solution()){
+                    sCart.printGroceries();
+                    System.exit(0);
 
-	//     public void put(Cart s) {
-	//         stack.push(s);
-	//     }
+                }
 
-	//     public boolean isEmpty() {
-	//         return stack.isEmpty();
-	//     }
-	// }
+                //checks to make sure item will fit in sack number 'i'
+			    if (sCart.addItem(i, sCart.unpackedItems.get(sCart.unpackedItems.size()-1))){
+                    //for loop for going through every sack in sCart
+				    for (int z = 0; z < numSacks; z++) {
+					    //for loop for going through every item in a sack from sCart
+					    for (int x = 0; x < sCart.sacks.get(z).contents.size(); x++) {
+						    //fills in new cart with data from sCart
+						    newCart.addItem(z,sCart.sacks.get(z).contents.get(x));
+					}
+				}
+			    //Adds Copied cart onto stack
+			    dfsStack.push(newCart);
+                }
+            }
+            dfsStack.pop();
+        }
 
-	// /**
-	//  * implementation of data storage via queue
-	//  */
-	// public class queueStoage implements storage {
-	//     Queue<Cart> queue = new Queue<Cart>();
-
-	//     public Cart get() {
-	//         queue.dequeue();
-	//     }
-    /***
-     * Depth first search to find solution to the bagging problem
-     * 
-     * @return "optimal" solution
-     */
-
-	//     public void put(Cart s) {
-	//         queue.enqueue(s);
-	//     }
-
-	//     public boolean isEmpty() {
-	//         return queue.isEmpty();
-	//     }
-	// }
-
-	// /***
-	//  * Depth first search to find solution to the bagging problem
-	//  * 
-	//  * @return "optimal" solution
-	//  */
-
-	// private Cart DFS(Cart s) {
-
-	//     // initialize the data store with s
-	//     storage dfs;
-	//     dfs.add(s);
-
-	//     while (!dfs.isEmpty()) {
-
-	//     }
-
-	//     // while data store has stuff in it:
-
-	//     // pull next solution s from data store
-
-	//     // check it for being bad state, if so continue
-	//     // check it for being a goal state, if yes return
-
-	//     // if it isn’t
-	//     // need to expand storage —
-	//     // grab next unpacked item,
-	//     // remove it from unpacked item list
-	//     // for each bag, make a copy of the solution state, and pack the item in it ,
-	//     // if no constraints are violated and then place it in data structure
-
-	// }
+	}
 
 	void BFS() {
 

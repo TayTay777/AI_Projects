@@ -19,6 +19,10 @@ class Driver {
         }
         else if (args[1].equals("-depth")){
             //code for dfs goes here
+            Baggins DFSSolutions = new Baggins(file);
+    
+            //Prints BFS Solutions
+            DFSSolutions.DFS();
         }
         else System.out.println("Error: Second argument must be \"-depth\" or \"-breadth\"");
 
