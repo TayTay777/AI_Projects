@@ -14,52 +14,6 @@ public class Baggins {
         this.file = file;
     }
 
-
-
-    public interface storage{
-        public Cart get();
-        public void put(Cart s);
-        public boolean isEmpty();
-    }
-    /**
-     * implementation of data storage via stack
-     */
-
-
-
-    public class stackStorage implements storage{
-        Stack<Cart> stack = new Stack<Cart>();
-        
-        public Cart get(){
-            stack.pop();
-        }
-        public void put(Cart s){
-            stack.push(s);
-        }
-        public boolean isEmpty(){
-            return stack.isEmpty();
-        }
-    }
-
-
-
-    /**
-     * implementation of data storage via queue
-     */
-    public class queueStoage implements storage{
-        Queue<Cart> queue = new Queue<Cart>();
-        
-        public Cart get(){
-            queue.dequeue();
-        }
-        public void put(Cart s){
-            queue.enqueue(s);
-        }
-        public boolean isEmpty(){
-            return queue.isEmpty();
-        }
-    }
-
     /***
      * Depth first search to find solution to the bagging problem
      * 
