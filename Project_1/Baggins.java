@@ -50,6 +50,11 @@ public class Baggins {
 	//     public Cart get() {
 	//         queue.dequeue();
 	//     }
+    /***
+     * Depth first search to find solution to the bagging problem
+     * 
+     * @return "optimal" solution
+     */
 
 	//     public void put(Cart s) {
 	//         queue.enqueue(s);
