@@ -117,8 +117,9 @@ public class Baggins {
 			}
 			bfsQueue.remove();
 		}
+		if(!solved){
+			System.out.println("failure");
+		}
 	}
-	if(!solved){
-		System.out.println("failure");
-	}
+	
 }
