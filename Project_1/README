@@ -1,4 +1,37 @@
-Taylor Roberts Hailee Kiesecker
+Taylor Roberts 
+Hailee Kiesecker
+Project 01 : Grocery bagging 1a
+Fall 2019
 
+Design :
 
+Design of our Breadth-First and Depth-First are very similar to eachother since instead
+of using recursion we used iteration. For the use of what we were trying to accomplish 
+we created different classes for eacho of the objects that we are using in our searches. 
+These are Items, Sacks, and Carts. 
 
+Within the Items class we did all our our pasrsing for the given file,doing this allowed 
+us to make an array list of indivudal item objects. These item objects housed our name of 
+the item, the size of the item, as well as an additonal arraylist of all the item objects 
+that can also be placed with a given item.
+
+From the Items class we can reference the number of sacks that are provided for a given problem
+as well as the sacks max size. The functionality of our Sack class allowes us to initialize 
+individiual sack objects and place items into them. It also does the brute work of figuring out if 
+an aboject will fit even if the items class has done the work of saying that the item can go with 
+another item already in the bag.
+
+Our cart class is our holder and solution checker. The cart class holds onto all of the contents that
+was found and placed in our items class as well as keeps track of how many sacks there are along with
+their size. Cart allows us to keep track of all of the unpackedItems. It also creats an arrayList of x
+amount of bags and initializes them to their max size. Within Cart we implement our addItem which makes 
+sure the items can go together per the constraints provided by the items class as well as comparing the
+the size of the bag before and after adding the object to make sure that the bag does not go over max
+capacity.
+
+With all of this base working for our searches it made the execution for Breadth First and Depth First much
+more simple. 
+
+Testing procedure
+
+Experimental Results
