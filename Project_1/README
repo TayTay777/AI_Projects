@@ -78,18 +78,21 @@ the GroceryProbGen with extrodinary values:
 
 java GroceryProbGen -numbags 500 -maxbagsize 15  -numitems 122 -maxitemsize 6 -minitemsize 1 -minconstraints 0 -maxconstraints 30
 
-Our program crashed using that given output which is in our provided file "thebigone.txt". However it did not crash due to running
-out of space. It broke because of our parsing. So we decided to be a little nicer on our program and ran 
-
-Java GroceryProbGen -numbags 500 -maxbagsize 15  -numitems 122 -maxitemsize 6 -minitemsize 1 -minconstraints 0 -maxconstraints 5
-
-See "thebigone2.txt" which our parcer could effectively handle but apparently our breadth-first search could not. After x  
-amount of printed solutions our code broke with a:
+Our program did not crash using -depth with the given output which is in our provided file "thebigone.txt". However, using breadth we ran into 
+a OutOfMemoryError while using breadth first. The error:
 
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
         at Cart.<init>(Cart.java:21)
         at Baggins.BFS(Baggins.java:96)
         at Driver.main(Driver.java:17)
+
+This also occured after cuttting down the amount of constriantes that the GroceryProbGen could use:
+
+Java GroceryProbGen -numbags 500 -maxbagsize 15  -numitems 122 -maxitemsize 6 -minitemsize 1 -minconstraints 0 -maxconstraints 5
+
+See "thebigone2.txt" which our depth first search could effectively handle but apparently our breadth-first search could not. After x  
+amount of printed solutions our code broke with the same OutOfMemoryError.
+
 
 since we did not see any reason why we should ever need to have this big of a grocery cart we decided to leave this. But we did want to
 make sure that the produced solutions were even valid for this kind of extrodinary test sample. Testing two solutions which we are not

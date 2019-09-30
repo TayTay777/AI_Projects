@@ -1,0 +1,124 @@
+500
+15
+item0 4
+item1 4 + item96 item25 item75 item53 item74 item73 item60 item57 item80 item111 item82 item41 item91 item33 item94
+item2 4 - item106 item83 item50 item23 item118 item86 item8 item65 item37 item69 item35 item52 item71 item55 item59 item114 item94 item34 item112 item57 item5 item85 item16 item79 item109 item31 item27 item63 item9 item22
+item3 4 + item59 item88 item92 item27 item77 item4 item78 item62 item58 item56 item21 item99 item18 item74 item95 item109 item38 item90 item7 item55
+item4 5 + item23 item88 item62 item78 item52 item15 item1 item48 item17 item18 item111 item0 item22 item26 item31 item104 item107 item3 item60 item120
+item5 1 - item41 item13 item63 item12 item34 item22 item67 item102 item37 item97 item47 item20 item89 item77 item98 item51 item46 item38 item32 item11 item73
+item6 5 + item36 item17
+item7 6 - item62 item3 item95 item0 item111
+item8 2
+item9 1 + item24 item89 item22 item34 item70 item114 item16 item2 item92 item61 item50 item28 item25 item55 item81 item45 item11 item15 item56 item4 item41 item99 item10
+item10 4 - item47 item54 item102 item71 item50 item114 item40 item101 item87 item60 item91 item27 item106 item73 item69 item43 item115 item1 item88 item94 item100 item0 item7 item76 item22 item99
+item11 1 - item81 item119 item16 item78 item85 item77 item44 item18 item1 item45 item74 item31 item38 item28
+item12 4 - item104 item37 item76 item49
+item13 5 - item120 item96 item53 item15
+item14 1 + item117 item25 item98 item120 item12 item105 item22 item110 item72 item45 item76 item2
+item15 3 + item25 item10 item38 item6 item7 item89 item45 item118 item102 item100 item78 item43 item117 item114 item68 item82 item19 item69 item24 item4 item29 item66 item71 item104 item111 item95 item48 item37 item92 item60
+item16 4 - item66 item93 item35 item82 item7 item77 item14 item91 item95 item113 item72
+item17 2 + item51 item35 item47 item68 item56 item34 item120 item57 item23 item100 item106 item65 item103 item93 item52 item37 item72 item30 item26 item46 item31 item43 item5
+item18 3 - item119 item67 item21 item52 item76 item43 item81 item62 item3 item29 item33 item63 item23 item114 item97
+item19 5 + item118 item104 item87 item114 item38 item25 item37
+item20 5 + item121 item54 item12 item76 item4 item113 item56 item9 item1 item101 item107 item90 item72 item8 item86 item48 item44 item104
+item21 1 + item110 item18 item47 item1 item24 item45 item43 item74 item85 item30 item12 item113 item23 item89 item70 item99 item48 item117 item42 item77 item69 item55 item2 item97 item63 item25 item5 item0 item84
+item22 4 + item49 item121 item43 item62 item34 item119 item32 item90 item71 item64 item65 item42 item27 item74 item25 item4 item59 item109 item37 item48 item114 item93 item106 item38 item15 item99 item20 item54
+item23 2 + item53 item28 item87 item40 item45 item76 item61 item73 item118
+item24 4 + item83 item77 item59 item37 item34 item30 item119 item54 item69 item78 item101 item9 item27 item79 item2 item60 item36 item7 item110 item120 item41 item21 item111
+item25 1 + item70 item80 item10 item68 item81 item91 item103 item101 item121 item54 item72 item31 item65 item82 item102 item60 item6 item116
+item26 1 - item105 item66 item42 item6 item103 item0 item28 item88
+item27 3 + item80 item86 item94 item58 item54 item102 item101 item91
+item28 1 - item39 item65 item16 item106 item41 item72 item32 item86 item25 item19 item118 item23 item20 item0 item10 item81 item29 item50 item15 item9 item82 item21 item67 item114 item38 item93 item89 item37 item68
+item29 2 + item69 item93 item45 item116 item27 item33 item20 item13 item83 item65 item48 item109 item10 item4 item118 item104 item31 item16 item97 item41 item26 item39 item12 item53 item75 item46 item89 item37
+item30 4 + item84 item110 item35 item103 item87 item55 item107 item38 item80 item88 item74 item40 item22 item29 item0 item119 item81 item32
+item31 5 - item27 item21 item100 item121 item47 item37 item111 item36 item55 item113 item68 item110 item28 item76 item102 item114 item59 item25 item29 item90 item1 item82 item35 item98 item48 item9 item10 item86
+item32 1 - item7 item98 item111 item57 item99 item74 item25 item95 item6 item65 item16 item115 item5 item21 item86 item41 item59 item104
+item33 1 - item10 item37 item3 item104 item30 item89 item115 item114
+item34 1 - item93 item6 item71 item35 item78 item113 item112 item66 item47 item46 item116 item64
+item35 5 - item80 item2 item66 item73 item12 item62 item74 item79 item6 item51 item29 item83 item69 item25 item94 item95 item71
+item36 2 - item18 item7 item20 item40 item46 item90 item115 item27 item58 item45 item59
+item37 5 + item6 item31 item26 item81 item3 item55 item66 item106 item25 item115 item57 item32 item12 item1 item19 item113 item119 item78 item7
+item38 3 - item41 item106 item82 item56 item46 item4 item102 item93 item16 item53 item72 item55 item115 item83 item107 item24 item52
+item39 4 + item97 item8 item110 item115 item14 item60 item70 item67 item29 item92 item108 item72 item32 item117 item78 item26 item63
+item40 4 - item14 item86 item47 item48 item113 item13 item57 item117 item74 item90 item46 item75 item41 item6 item79 item106 item31 item102 item119 item25 item20 item37 item60 item62 item107 item54 item103 item15 item104
+item41 4 + item18 item115 item35
+item42 5 + item70 item96 item49 item17 item92 item41 item8 item56 item80 item71 item27 item12 item55 item2
+item43 3 + item68 item91 item7 item109 item69 item113
+item44 2 - item63 item28 item21
+item45 3 + item11 item61 item104 item34 item81 item82 item8 item7 item20 item69 item94 item109 item85 item41 item110 item29 item115 item62 item4 item113 item97 item120 item13 item23 item93 item44
+item46 2 - item101 item82 item24 item70 item91 item5 item38 item45 item41 item66 item17 item68 item3 item110 item104
+item47 4 + item71 item93 item81 item69 item109 item26 item18 item107 item87 item5 item4 item117 item92
+item48 6 - item101 item120 item96 item98 item14 item29 item61 item80 item86 item39 item1 item34 item22 item104
+item49 5 + item16 item92 item21 item55 item54 item59 item109 item104 item36 item32 item89 item102 item70
+item50 3 - item111 item69 item60 item8 item98 item73 item120 item39 item46 item71 item34 item54 item64 item67 item58 item66 item5 item10
+item51 1 + item66 item2 item77 item29 item90 item98 item35 item108 item26 item45 item89 item13 item71 item21 item50 item19 item58 item96 item105 item91 item8 item99 item52 item113
+item52 6 + item74 item104 item51 item26 item76 item87 item27 item61 item70 item31 item118 item116 item46 item49 item6 item60 item72 item71 item42 item81 item11
+item53 6 - item29 item108 item78 item25 item54 item12 item50 item114 item9 item36
+item54 2 - item115 item10 item32 item79 item24 item31 item97 item58 item30 item51 item95 item73 item43 item71 item33 item56 item78 item37 item52 item17 item68 item45 item98 item85 item60 item47 item75 item4 item93 item61
+item55 6 - item81 item0 item117 item12 item23
+item56 6 - item62 item2 item95 item10 item60 item119
+item57 3 + item117 item95 item72 item60 item19 item98 item111 item62 item24 item21 item96 item59 item102 item99 item53 item4 item45 item14 item85
+item58 3 - item82 item86 item105 item88 item35 item45 item25 item98 item16 item117 item55 item84 item21 item8 item47 item20 item119 item33 item65 item94 item113 item22 item28 item70 item26 item15 item75 item3 item60 item91
+item59 6 + item80 item5 item42 item14 item54 item32 item55 item25 item48 item67 item1 item13 item82 item107 item27 item46 item3 item71 item53 item89 item72 item114 item21 item15 item85 item115 item88 item118 item43 item111
+item60 2 + item47 item111 item54 item64 item42 item92 item117 item5 item116 item107 item76 item9 item115 item61 item113 item68 item15 item81 item44
+item61 1 - item51 item0 item28 item63 item5 item50 item95 item22 item106 item98 item21 item33 item44 item15 item17 item102
+item62 5 - item80 item77 item16 item78 item108 item60 item85 item87 item53 item84 item115 item92 item44 item9 item68 item19 item74 item79
+item63 4 - item91 item98 item51 item55 item33 item37 item96 item17 item86 item52 item107 item5
+item64 5 + item85 item58 item7 item98 item3 item93 item0 item31 item60 item55 item32 item86 item53 item81 item78 item77 item34 item5 item39 item70 item103 item97 item52 item16 item102 item6 item61 item100
+item65 1 - item101 item8 item45 item62 item59 item114 item78 item104 item110 item36 item38 item64 item50 item93 item53 item28 item22 item11 item99 item4 item10 item30 item60 item97 item24 item89 item17
+item66 1 + item30 item53 item80 item114 item95 item13 item72 item54 item56 item69 item91
+item67 4 + item17 item8 item13
+item68 4 - item63 item37 item0 item105 item59 item14 item113 item69 item64 item3
+item69 6 + item74 item37 item53 item119 item40 item60 item6 item71 item81 item79 item45 item80 item50
+item70 5 + item18 item44 item118 item77 item31 item84 item58 item4 item110 item2 item91 item112 item22 item35 item85 item23 item76 item38 item71 item29 item36 item107 item121 item98 item74 item0 item101 item42 item37
+item71 2 - item101 item77 item3 item120 item80 item52
+item72 2 + item67 item74 item54 item73 item89 item14 item94 item65
+item73 2 + item66 item16 item33 item71 item82 item52 item114 item7 item102 item1 item59 item10
+item74 3 + item23 item84 item76 item9 item1 item53 item62 item106 item104 item32 item38 item26 item113 item121 item67 item89 item97 item111 item34 item13 item47 item91 item105 item17 item22
+item75 5 - item35 item76 item36 item43 item13 item73 item37 item11 item121 item0 item65 item42 item81 item108 item12 item25 item102 item113 item118 item93 item90 item18 item45 item110 item96 item14 item59 item84 item86
+item76 3 - item19 item90 item115 item6 item32 item77 item93 item85 item83 item97 item78 item49 item120 item58 item72 item7 item20 item36 item91 item23 item21
+item77 5 + item76 item47 item52 item54 item68 item103
+item78 6 + item83 item118 item35 item31 item62 item20 item52 item70 item38 item66 item100 item34 item23 item82 item91 item14 item88 item27 item103 item104 item92 item9 item94 item86 item61 item90 item10 item8 item76
+item79 1 - item10 item120
+item80 1 + item69 item96 item84 item16 item35 item50 item117 item0 item22 item48 item20 item105 item37 item77 item99 item24 item104 item2
+item81 4 + item57 item20 item27
+item82 4 + item45 item58 item40
+item83 4 + item87 item11
+item84 2 + item45 item4 item116 item104 item56 item80 item28 item57 item88 item48 item94 item115
+item85 6 + item93 item15 item106 item7 item16 item51 item53 item96 item29 item67 item8 item5 item26 item65 item19 item52 item73 item69 item68 item115 item21 item64 item22 item119 item79 item37 item113 item0 item82
+item86 3 + item42 item68 item13 item84 item116 item96 item74 item50 item111 item43 item82 item40 item48 item6 item20
+item87 2 + item86 item90 item7 item36 item77 item27 item17 item3 item38 item63 item20 item59 item107 item53 item9
+item88 5 - item98 item109 item117 item106 item46 item39
+item89 4 - item106 item22 item65 item92 item11 item34 item100 item2 item83 item1 item47 item118 item39
+item90 1 + item75 item10 item27 item11 item51 item41
+item91 2
+item92 2 - item37 item69 item55 item42 item10 item21 item109 item22 item98 item110 item25 item33 item28 item76 item50 item85 item96 item111 item70 item46 item15 item4 item79 item108 item120 item107 item19 item113
+item93 4 + item55 item121 item36 item56 item101 item4 item13 item102 item105 item85 item100
+item94 1 - item117
+item95 5 - item94 item14 item78 item93 item90 item19 item40 item64 item35 item111 item110 item121 item23 item21 item86 item71 item27 item46 item102 item53
+item96 5 + item76 item109 item101
+item97 4 + item23 item101 item17 item50 item63 item76
+item98 3 + item79 item91 item44 item78 item109 item90 item108 item106 item59 item11 item113 item68 item25 item41 item21 item20 item94 item50
+item99 2 - item105 item16 item48 item27 item50 item19 item38 item4 item115 item91 item96 item63 item6 item18 item5 item12 item1 item121 item87 item7 item65
+item100 5 - item4 item104 item86 item22 item73 item33 item110 item107 item66 item18 item121 item95 item88 item101 item10 item48 item6 item0 item47 item9 item52 item43 item69 item75 item24 item119 item31 item97 item77
+item101 6 + item7 item57 item39 item41 item53 item103 item27 item43 item66 item59 item100 item85 item29 item5 item18 item33
+item102 2 - item66
+item103 6 + item64 item89 item74 item48 item109 item20
+item104 1 + item121 item76 item111 item83 item55 item69 item99 item25 item35 item75 item90 item2 item46 item31 item101 item112 item67 item21 item36 item17 item15 item59
+item105 1 + item79 item113 item15 item16 item83 item75 item99 item46 item49 item110 item62 item30 item8
+item106 3 + item114 item10 item94 item98
+item107 6 - item11 item21 item73 item50 item80 item100 item23 item98 item29 item28 item44 item16 item20 item15 item114 item8 item111 item112 item24 item81 item108 item48 item119 item49 item2 item34 item46 item113
+item108 1 + item49 item33 item4 item36 item89 item52 item75 item19 item7 item2 item65 item91 item103 item88 item32 item112 item81 item97 item100 item104 item109 item54
+item109 3 - item47 item86 item71 item79 item108 item94 item59 item57 item40 item18 item97 item44 item104 item26 item118 item119 item113 item10 item8 item69
+item110 6 - item60 item36 item100 item66 item92 item94 item97 item114 item41 item106 item121 item73 item25 item11 item89 item23 item17 item70 item90 item38 item83 item103 item115 item78
+item111 6 - item63 item118 item70 item103 item55 item24 item56 item37 item10 item83 item2 item40 item115 item35 item4 item117
+item112 6 - item1 item24 item87 item82 item113 item102 item13 item64 item56 item103
+item113 4 + item120 item38 item8 item107 item36 item83 item95 item7 item0 item6 item46 item111 item51 item92 item1 item19 item18 item12 item112 item82
+item114 6 + item50 item96 item81 item38 item4 item64 item63 item88 item25 item35 item93 item11
+item115 4 - item38 item83 item5 item9 item7 item61 item21 item26 item43 item71 item31
+item116 5 + item74 item110 item48 item85 item111 item62 item34 item61 item26 item22 item60 item103 item47 item4 item56 item55 item59 item57 item87
+item117 2 - item82 item85 item118 item119 item113 item58 item28 item105 item61 item14 item63 item112 item6 item86 item46 item41 item12 item79 item49 item47 item4
+item118 1 + item49 item115 item44 item97 item25 item96 item119 item110 item72 item20 item12 item11 item101 item18 item1 item59
+item119 4 + item74 item69 item84 item76
+item120 5 + item9 item75 item31 item0 item27 item86 item59
+item121 1 - item60 item1 item80 item107 item88 item92 item5 item83 item118 item104 item0 item95 item114 item100 item50 item9 item74 item15 item101 item3 item22 item98 item116 item23 item77 item70 item105 item43 item11
