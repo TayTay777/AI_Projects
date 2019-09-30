@@ -4,6 +4,7 @@ Project 01 : Grocery bagging 1a
 Fall 2019
 
 01 Design :
+-------------------------------------------------------------------------------------------------------------------------
 
 Design of our Breadth-First and Depth-First are very similar to eachother since instead
 of using recursion we used iteration. For the use of what we were trying to accomplish 
@@ -43,8 +44,156 @@ instead of removing the last cart created it peeks into the first cart. The prog
 the peeked cart is a solution, if it is not it is copied and manipulated. Once done we then add the new
 manipulated copied cart into the queue and remove the current first cart that no longer is valid.
 
-02 Testing procedure
+02 Testing procedure & sample results
+-------------------------------------------------------------------------------------------------------------------------
+
+Initially testing we used the provided testing example:
+
+3                   //number of bags available
+7                   //maximum bag size is 7
+bread  3 + rolls    //1st item size
+rolls  2 + bread    //1st item size
+squash 3 - meat     //2nd item size
+meat   5            //3rd item size
+lima_beans 1 - meat //5th item size
+
+and then ran the given solution checker "deliver" to see if the solution that we produced was indeed a correct solution.
+This problem though was obviously solvable so the next steps we took to test the program were to produce testing sets 
+that were not solvable. For example: 
+
+3                  
+7                   
+item0 3 + item1    
+item1 2 + item0    
+item2 3 - item3     
+item3 2            
+item4 5 - item3 
+
+This allowed us to check the requirment of producing failure results. Before testing impossible test sets our code was not
+handling failures.
+
+Now that the base was established, being it can find simple solutions and knows when something isnt solvable. we decided to
+test the limits of the breadth first search since it is taking up a lot of memory. Using the provided baggen.tar.gz and running 
+the GroceryProbGen with extrodinary values: 
+
+java GroceryProbGen -numbags 500 -maxbagsize 15  -numitems 122 -maxitemsize 6 -minitemsize 1 -minconstraints 0 -maxconstraints 30
+
+Our program crashed using that given output which is in our provided file "thebigone.txt". However it did not crash due to running
+out of space. It broke because of our parsing. So we decided to be a little nicer on our program and ran 
+
+Java GroceryProbGen -numbags 500 -maxbagsize 15  -numitems 122 -maxitemsize 6 -minitemsize 1 -minconstraints 0 -maxconstraints 5
+
+See "thebigone2.txt" which our parcer could effectively handle but apparently our breadth-first search could not. After x  
+amount of printed solutions our code broke with a:
+
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+        at Cart.<init>(Cart.java:21)
+        at Baggins.BFS(Baggins.java:96)
+        at Driver.main(Driver.java:17)
+
+since we did not see any reason why we should ever need to have this big of a grocery cart we decided to leave this. But we did want to
+make sure that the produced solutions were even valid for this kind of extrodinary test sample. Testing two solutions which we are not
+including to save on sanity and space but the solutions produced before the OutOfMemoryError occured were correct solutions. Testing it with 
+depth first search as well it prodced a correct solution.
+
+At this point we went back to simplicity and tried out the following test samples:
+
+4
+100
+item0 1
+item1 1
+item2 1 - item4 item0
+item3 1 - item2 item0 item1 item4
+item4 1 - item2 item3
+item5 1 - item2
+------------------------------------good solution!
+success
+item4   item0
+item3
+item2
+item5   item1
 
 
+7
+10
+item0 1
+item1 1
+item2 1 - item4 item0
+item3 1 - item2 item0 item1 item4
+item4 1 - item2 item3
+item5 1 - item2
+----------------------------------good solution!
+success
+item4
+item3
+item2
+item1
+item0
+item5
 
-03 Experimental Results
+
+3                  
+7                   
+item0 3 + item1    
+item1 2 + item0    
+item2 3 - item3     
+item3 2            
+item4 5 - item3
+---------------------failed
+xxxxxxxxxxxxxxxxx
+
+failed
+7
+5
+item0 1 - item8 item3 item4 item1 item2
+item1 4 - item4 item7 item9 item2
+item2 3 - item1 item5 item0 item9 item6
+item3 5 - item9 item5 item1 item0 item4
+item4 4 - item1 item9 item0 item3 item6
+item5 5 - item1 item2 item0 item6
+item6 6 + item0 item9
+item7 4 + item9 item0 item8
+item8 4 + item6 item4 item5 item9 item2
+item9 2 - item3
+----------------------------------------failed
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+failed
+9
+5
+item0 2 - item6 item3 item1 item7 item8
+item1 1 + item2 item5 item8 item9 item3
+item2 1 + item5
+item3 1 - item5 item8
+item4 6 + item9 item0 item2
+item5 6 + item4 item2
+item6 3 + item7 item3 item2
+item7 4 - item8 item2
+item8 5 - item6 item2
+item9 4 - item0 item5 item6
+-------------------------------failed
+xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+9
+5
+item0 1
+item1 2 - item4
+item2 2
+item3 2 + item6 item8 item9 item7 item0
+item4 2
+item5 3
+item6 2 + item9 item3 item7
+item7 1
+item8 1
+item9 1
+----------------------------------good solution
+success
+item8
+item7
+item6
+item5
+item4
+item3
+item2
+item1
+item9   item0

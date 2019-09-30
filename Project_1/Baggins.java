@@ -33,7 +33,7 @@ public class Baggins {
 
         while(!dfsStack.isEmpty()){
             for (int i = 0; i < dfsCart.sacks.size(); i++){
-                Cart sCart = dfsStack.pop(); //getting top cart
+                Cart sCart = dfsStack.peek(); //getting top cart
 			    Cart newCart = new Cart(items, numSacks, dfsItems.sackSize);
                 //solution found get out
                 if (sCart.solution()){
@@ -51,14 +51,14 @@ public class Baggins {
 					    for (int x = 0; x < sCart.sacks.get(z).contents.size(); x++) {
 						    //fills in new cart with data from sCart
 						    newCart.addItem(z,sCart.sacks.get(z).contents.get(x));
+						}
 					}
-				}
 			    //Adds Copied cart onto stack
 			    dfsStack.push(newCart);
                 }
             }
             
-          
+          dfsStack.pop();
         }
 		if(!solved){
 			System.out.println("failure");
