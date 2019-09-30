@@ -33,7 +33,7 @@ public class Baggins {
 
         while(!dfsStack.isEmpty()){
             for (int i = 0; i < dfsCart.sacks.size(); i++){
-                Cart sCart = dfsStack.peek(); //getting top cart
+                Cart sCart = dfsStack.pop(); //getting top cart
 			    Cart newCart = new Cart(items, numSacks, dfsItems.sackSize);
                 //solution found get out
                 if (sCart.solution()){
@@ -56,7 +56,8 @@ public class Baggins {
 			    dfsStack.push(newCart);
                 }
             }
-            dfsStack.pop();
+            
+          
         }
 
 	}
