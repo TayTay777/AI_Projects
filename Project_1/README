@@ -3,7 +3,7 @@ Hailee Kiesecker
 Project 01 : Grocery bagging 1a
 Fall 2019
 
-Design :
+01 Design :
 
 Design of our Breadth-First and Depth-First are very similar to eachother since instead
 of using recursion we used iteration. For the use of what we were trying to accomplish 
@@ -17,21 +17,34 @@ that can also be placed with a given item.
 
 From the Items class we can reference the number of sacks that are provided for a given problem
 as well as the sacks max size. The functionality of our Sack class allowes us to initialize 
-individiual sack objects and place items into them. It also does the brute work of figuring out if 
-an aboject will fit even if the items class has done the work of saying that the item can go with 
-another item already in the bag.
+individiual sack objects and place items into them. It also does the brute work of figuring 
+out if an aboject will fit even if the items class has done the work of saying that the item 
+can go with another item already in the bag.
 
-Our cart class is our holder and solution checker. The cart class holds onto all of the contents that
-was found and placed in our items class as well as keeps track of how many sacks there are along with
-their size. Cart allows us to keep track of all of the unpackedItems. It also creats an arrayList of x
-amount of bags and initializes them to their max size. Within Cart we implement our addItem which makes 
-sure the items can go together per the constraints provided by the items class as well as comparing the
-the size of the bag before and after adding the object to make sure that the bag does not go over max
-capacity.
+Our cart class is our holder and solution checker. The cart class holds onto all of the contents
+that was found and placed in our items class as well as keeps track of how many sacks there are 
+along with their size. Cart allows us to keep track of all of the unpackedItems. It also creats 
+an arrayList of x amount of bags and initializes them to their max size. Within Cart we implement 
+our addItem which makes sure the items can go together per the constraints provided by the items
+class as well as comparing the size of the bag before and after adding the object to make sure
+that the bag does not go over max capacity.
 
-With all of this base working for our searches it made the execution for Breadth First and Depth First much
-more simple. 
+With all of this base working for our searches it made the execution for Breadth First and Depth
+First much more simple. The design of Dreadth-First search was to make a stack of carts. Each 
+cart as described before contains x number of sacks along with all of the unpackedItems. To 
+exercise a solution The first cart is popped off of the stack and manimpulated. First the code
+checks to see if the current cart is a solution. If it is not then the next item in the unpackedItems 
+arrayList is added to the next avalible sack. Once this is done the new cart (the cart is newly
+created each time due to the removal of unpackedItems) is pushed onto the stack and the old cart is 
+no longer around. This process continues to manipulate the same cart until a solution is found.
 
-Testing procedure
+In regards to Breadth-First search the same process is followed however it is obviously done using queue.
+instead of removing the last cart created it peeks into the first cart. The program checks to see if 
+the peeked cart is a solution, if it is not it is copied and manipulated. Once done we then add the new
+manipulated copied cart into the queue and remove the current first cart that no longer is valid.
 
-Experimental Results
+02 Testing procedure
+
+
+
+03 Experimental Results

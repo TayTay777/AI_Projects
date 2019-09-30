@@ -14,7 +14,7 @@ public class Baggins {
 	}
 
 	void DFS() {
-
+		boolean solved = false;
 		Items dfsItems = new Items(file);
 		ArrayList<Item> items = dfsItems.createItems();
 		int numSacks = dfsItems.numSacks;
@@ -37,6 +37,7 @@ public class Baggins {
 			    Cart newCart = new Cart(items, numSacks, dfsItems.sackSize);
                 //solution found get out
                 if (sCart.solution()){
+					solved = true;
                     sCart.printGroceries();
                     System.exit(0);
 
@@ -59,13 +60,15 @@ public class Baggins {
             
           
         }
-
+		if(!solved){
+			System.out.println("failure");
+		}
 	}
 
 	void BFS() {
 
 
-
+		boolean solved = false;
 		Items bfsItems = new Items(file);
 		ArrayList<Item> items = bfsItems.createItems();
 		int numSacks = bfsItems.numSacks;
@@ -93,6 +96,7 @@ public class Baggins {
 				Cart newCart = new Cart(items, numSacks, bfsItems.sackSize);
 
 				if (queCart.solution()){
+					solved = true;
 					queCart.printGroceries();
 					break;
 				}
@@ -113,5 +117,8 @@ public class Baggins {
 			}
 			bfsQueue.remove();
 		}
+	}
+	if(!solved){
+		System.out.println("failure");
 	}
 }
