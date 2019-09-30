@@ -1,18 +1,21 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
+import java.io.File;
 
 import sun.misc.Queue;
 
 public class Baggins {
 
     File file; // taking in contents of cart and restrictions
-    private int numSacks; // number of bags available
-    private int sackSize; // maximum bag size
+
 
     public Baggins(File file) {
         this.file = file;
     }
+
+
+
     public interface storage{
         public Cart get();
         public void put(Cart s);
@@ -21,6 +24,9 @@ public class Baggins {
     /**
      * implementation of data storage via stack
      */
+
+
+
     public class stackStorage implements storage{
         Stack<Cart> stack = new Stack<Cart>();
         
@@ -34,6 +40,9 @@ public class Baggins {
             return stack.isEmpty();
         }
     }
+
+
+
     /**
      * implementation of data storage via queue
      */
@@ -86,26 +95,44 @@ public class Baggins {
 
     void BFS() {
 
+
+
+        Items bfsItems = new Items(file);
+
+        int numSacks = bfsItems.numSacks;
+        ArrayList<Item> items = bfsItems.createItems();
+
+
+        Cart bfsCart = new Cart(items, numSacks, bfsItems.sackSize);
+
+
+        //only methods needed 
+        //addItem(sackNum, item)
+        //solution(cart)
+
+
+
+
     }
 
     // TO DO: groceries class now needs to fit the
     // new classes below: item, items, and sack
     public class Cart {
 
-        Vector<sack> sacks;
-        ArrayList<item> unpackedItems;
+        Vector<Sack> sacks;
+        ArrayList<Item> unpackedItems;
 
-        public Cart(ArrayList<item> items, int numSacks, int maxSackSize) {
-            unpackedItems = new ArrayList<item>(items);
-            sacks = new Vector<sack>(numSacks);
+        public Cart(ArrayList<Item> items, int numSacks, int maxSackSize) {
+            unpackedItems = new ArrayList<Item>(items);
+            sacks = new Vector<Sack>(numSacks);
             for (int i = 0; i < numSacks; i++)
-                sacks.add(new sack(maxSackSize));
+                sacks.add(new Sack(maxSackSize));
         }
 
 
         //Tries to add an item to specified sack
         //if it cannot fit, returns false, else returns true
-        boolean addItem(int sackNum, item item) {
+        boolean addItem(int sackNum, Item item) {
 
             boolean canMix = false;
             for (int i = 0; i <  sacks.get(sackNum).contents.size(); i++){
@@ -119,12 +146,25 @@ public class Baggins {
             if (canMix){
                 if (item.itemSize <= sacks.get(sackNum).openSpace) {
                     return false;
-                } else
+                } 
+                else {
+                    sacks.get(sackNum).addItem(item);
+                    unpackedItems.remove(item);
+                }
                     return true;
             }
             else return false;
-
         }
+
+
+
+        boolean solution(Cart cart){
+            if (unpackedItems.size() == 0){
+                return true;
+            } else return false;
+        }
+
+
 
         // This will print one solution
         // the DFS or BFS will keep calling
@@ -136,13 +176,13 @@ public class Baggins {
 
     }
 
-    public class item {
+    public class Item {
 
         String name;
         ArrayList<String> compatible = new ArrayList<String>();
         int itemSize;
 
-        public item(String name, ArrayList<String> compatible, int itemSize) {
+        public Item(String name, ArrayList<String> compatible, int itemSize) {
             this.name = name;
             this.compatible = compatible;
             this.itemSize = itemSize;
@@ -165,36 +205,48 @@ public class Baggins {
      * @return Items ArrayList
      */
 
-    public class items {
+    public class Items {
 
-        ArrayList<item> items = new ArrayList<item>();
+        ArrayList<Item> items = new ArrayList<Item>();
         File file;
         Scanner fileScan;
+        int numSacks;
+        int sackSize;
 
-        public items(File file) {
+        public Items(File file) {
             this.file = file;
 
             // initialize the file
-            fileScan = new Scanner(file);
+            try {
+                fileScan = new Scanner(file);
+            } catch (Exception e) {
+                //TODO: handle exception
+            }
+            
 
         }
 
         // @return: items arraylist
 
-        ArrayList<item> createItems() {
+        ArrayList<Item> createItems() {
 
             // Gets all the groceries items for reference
             ArrayList<String> baseItems = new ArrayList<String>();
             // Scans past the # of bags and max bag size
 
-            numSacks = fileScan.nextLine(); // setting number of sacks
-            sackSize = fileScan.nextLine(); // setting size of each bag
+            numSacks = fileScan.nextInt(); // setting number of sacks
+            fileScan.nextLine();
+            sackSize = fileScan.nextInt(); // setting size of each bag
+            fileScan.nextLine();
 
+
+            //creates an item list of Strings
             while (fileScan.hasNextLine()) {
                 baseItems.add(fileScan.next());
-                nextLine();
+                fileScan.nextLine();
 
             }
+
             fileScan.reset(); // goes to top of file
 
             // Scans past the # of bags and max bag size
@@ -208,14 +260,14 @@ public class Baggins {
                 ArrayList<String> compatible = new ArrayList<String>();
                 int itemSize;
 
-                String itemLine = fileScan.NextLine();
+                String itemLine = fileScan.nextLine();
                 Scanner itemLineScan = new Scanner(itemLine);
                 boolean plus = false;
                 boolean hasCons = false;
 
                 itemName = itemLineScan.next();
                 itemSize = itemLineScan.nextInt();
-                if (itemLineScan.hasnext()) {
+                if (itemLineScan.hasNext()) {
                     hasCons = true;
                     if (itemLineScan.next().equals("+")) {
                         plus = true;
@@ -249,32 +301,32 @@ public class Baggins {
 
     }
 
-    public class sack {
+    public class Sack {
 
         int maxSize;
         int openSpace;
-        ArrayList<item> contents = new ArrayList<item>();
+        ArrayList<Item> contents = new ArrayList<Item>();
 
         // initializing bag
-        public sack(int maxSize) {
+        public Sack(int maxSize) {
             this.maxSize = maxSize;
             openSpace = maxSize;
         }
 
         // allows program to add item into bag
-        void addItem(item item) {
+        void addItem(Item item) {
             contents.add(item);
             openSpace = openSpace - item.itemSize;
         }
 
         // returns size of current bag
         public int getSize() {
-            return sack.maxSize();
+            return maxSize;
         }
 
         // allows program to initially check if the item
         // will fit in the bag
-        boolean canFit(item item) {
+        boolean canFit(Item item) {
             if ((openSpace - item.itemSize) < 0) {
                 return false;
             } else {
