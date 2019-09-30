@@ -26,6 +26,8 @@ public class Items {
 			try {
 				fileScan = new Scanner(file);
 			} catch (Exception e) {
+				System.out.println("failure");
+				System.exit(0);
 				// TODO: handle exception
 			}
 

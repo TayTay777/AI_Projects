@@ -6,8 +6,11 @@ class Driver {
     public static void main(String[] args) {
 
         File file = new File(args[0]);
- 
-    
+        if(file.exists()){
+
+        
+        
+        
 
         if (args[1].equals("-breadth")){
 
@@ -26,7 +29,12 @@ class Driver {
         }
         else System.out.println("Error: Second argument must be \"-depth\" or \"-breadth\"");
 
-
     }
+        else{
+            System.out.println("failure");
+		    System.exit(0);
+        }
+    }
+
 
 }
