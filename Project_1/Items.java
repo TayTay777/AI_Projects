@@ -6,7 +6,8 @@ import java.io.File;
  * an Items class that parces through the given file and creates an array list
  * of multiple item objects that include their individual constraints, names,
  * and weights.
- * 
+ * @author Taylor Roberts
+ * @author Hailee Kiesecker
  * @return Items ArrayList
  */
 
@@ -25,6 +26,7 @@ public class Items {
 			// initialize the file
 			try {
 				fileScan = new Scanner(file);
+			
 			} catch (Exception e) {
 				System.out.println("failure");
 				System.exit(0);

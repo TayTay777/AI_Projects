@@ -1,5 +1,10 @@
 import java.io.File;
-
+/**
+ * Driver class calles baggins to run a DFS or BFS
+ * 
+ * @author Taylor Roberts
+ * @author Hailee Kiesecker
+ */
 
 class Driver {
 

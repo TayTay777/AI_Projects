@@ -1,5 +1,10 @@
 import java.util.ArrayList;
-
+/**
+ * creation and functionality of a cart
+ * 
+ * @author Taylor Roberts
+ * @author Hailee Kiesecker
+ */
 
 public class Cart {
 
@@ -48,8 +53,10 @@ public class Cart {
 		boolean solution() {
 			if (unpackedItems.size() == 0) {
 				return true;
-			} else
+			} else{
+			
 				return false;
+			}
 		}
 
 		// This will print one solution

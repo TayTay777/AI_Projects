@@ -30,19 +30,21 @@ our addItem which makes sure the items can go together per the constraints provi
 class as well as comparing the size of the bag before and after adding the object to make sure
 that the bag does not go over max capacity.
 
-With all of this base working for our searches it made the execution for Breadth First and Depth
-First much more simple. The design of Dreadth-First search was to make a stack of carts. Each 
-cart as described before contains x number of sacks along with all of the unpackedItems. To 
-exercise a solution The first cart is popped off of the stack and manimpulated. First the code
-checks to see if the current cart is a solution. If it is not then the next item in the unpackedItems 
-arrayList is added to the next avalible sack. Once this is done the new cart (the cart is newly
-created each time due to the removal of unpackedItems) is pushed onto the stack and the old cart is 
-no longer around. This process continues to manipulate the same cart until a solution is found.
+With all of these foundational classes working for our searches it made the execution for Breadth-First 
+and Depth-First searches much more simple. The design of Depth-First search was to make a stack of 
+carts. Each cart as described before contains x number of sacks along with all of the unpackedItems. 
+To exercise a solution The first cart is popped off of the stack and manipulated. First the code
+checks to see if the current popped cart is a solution. If it is a solution, the DFS is done, and 
+prints the solution. If the popped cart is not a solution then copies of the cart are made equaling 
+the amount of the number of sacks i.e. if there is 4 sacks, then 4 cart copies are made. This is to
+make sure the next item is put into every bag number. Then these copies are added to the stack, and 
+the popped cart is discarded. The process keeps repeating until the stack is empty.
 
 In regards to Breadth-First search the same process is followed however it is obviously done using queue.
 instead of removing the last cart created it peeks into the first cart. The program checks to see if 
-the peeked cart is a solution, if it is not it is copied and manipulated. Once done we then add the new
-manipulated copied cart into the queue and remove the current first cart that no longer is valid.
+the peeked cart is a solution, if it is not it is copied and manipulated like the DFS. If it is a 
+solution, the solution is stored and not other copies are made. Once done we then add the new manipulated 
+copies of cart objects into the queue and remove the cart being peaked at.
 
 02 Testing procedure & sample results
 -------------------------------------------------------------------------------------------------------------------------

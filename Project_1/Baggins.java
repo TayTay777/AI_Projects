@@ -3,7 +3,13 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
-
+/**
+ * working class calling other created classes
+ * implements DFS and BFS
+ * 
+ * @author Taylor Roberts
+ * @author Hailee Kiesecker
+ */
 public class Baggins {
 
 
@@ -11,6 +17,7 @@ public class Baggins {
 
 	public Baggins(File file) {
 		this.file = file;
+		
 	}
 
 	void DFS() {

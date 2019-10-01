@@ -1,6 +1,13 @@
 import java.util.ArrayList;
 
-
+/**
+ * item class initializes each item with 
+ * with a string name arraylist of compatible item objects
+ * and how much the item weighs
+ * 
+ * @author Taylor Roberts
+ * @author Hailee Kiesecker
+ */
 public class Item {
 
 		String name;
