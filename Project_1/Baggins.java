@@ -124,7 +124,6 @@ public class Baggins {
 				if (queCart.solution()){
 					solved = true;
 					queCart.printGroceries();
-					//break;
 				}
 
 				//checks to make sure item will fit in sack number 'i'
@@ -132,7 +131,7 @@ public class Baggins {
 				//a new Cart called newCart. Afterwards the queCart is removed
 				//once all the other sacks from the first for loop (i) are checked.
 				//changed if to else if
-				else if (queCart.addItem(i, queCart.unpackedItems.get(queCart.unpackedItems.size()-1))){
+				else if (queCart.canAdd(i, queCart.unpackedItems.get(queCart.unpackedItems.size()-1))){
 					//for loop for going through every sack in queCart
 					for (int z = 0; z < numSacks; z++) {
 						//for loop for going through every item in a sack from queCart
@@ -141,6 +140,8 @@ public class Baggins {
 							newCart.addItem(z,queCart.sacks.get(z).contents.get(x));
 						}
 					}
+					//Adds the new item
+					newCart.addItem(i, queCart.unpackedItems.get(queCart.unpackedItems.size()-1));
 					//Adds Copied cart into queue
 					//Only if an item can be added, 
 					//will a new copy be 

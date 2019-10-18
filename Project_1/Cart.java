@@ -49,7 +49,29 @@ public class Cart {
             } 
             else return false;
 		}
+		
+		
+		boolean canAdd(int sackNum, Item item) {
 
+            boolean canMix = true;
+            for (int i = 0; i < sacks.get(sackNum).contents.size(); i++) {
+                if (sacks.get(sackNum).contents.get(i).checkCompatible(item) == false) {
+                    canMix = false;
+                    break;
+                }
+            }
+
+            if (canMix) {
+                if (item.itemSize > sacks.get(sackNum).openSpace) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } 
+            else return false;
+		}
+
+		
 		boolean solution() {
 			if (unpackedItems.size() == 0) {
 				return true;
