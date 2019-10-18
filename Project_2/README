@@ -1,0 +1,204 @@
+Taylor Roberts 
+Hailee Kiesecker
+Project 01 : Grocery bagging 1a
+Fall 2019
+
+01 Design :
+-------------------------------------------------------------------------------------------------------------------------
+
+Design of our Breadth-First and Depth-First are very similar to eachother since instead
+of using recursion we used iteration. For the use of what we were trying to accomplish 
+we created different classes for eacho of the objects that we are using in our searches. 
+These are Items, Sacks, and Carts. 
+
+Within the Items class we did all our our pasrsing for the given file,doing this allowed 
+us to make an array list of indivudal item objects. These item objects housed our name of 
+the item, the size of the item, as well as an additonal arraylist of all the item objects 
+that can also be placed with a given item.
+
+From the Items class we can reference the number of sacks that are provided for a given problem
+as well as the sacks max size. The functionality of our Sack class allowes us to initialize 
+individiual sack objects and place items into them. It also does the brute work of figuring 
+out if an aboject will fit even if the items class has done the work of saying that the item 
+can go with another item already in the bag.
+
+Our cart class is our holder and solution checker. The cart class holds onto all of the contents
+that was found and placed in our items class as well as keeps track of how many sacks there are 
+along with their size. Cart allows us to keep track of all of the unpackedItems. It also creats 
+an arrayList of x amount of bags and initializes them to their max size. Within Cart we implement 
+our addItem which makes sure the items can go together per the constraints provided by the items
+class as well as comparing the size of the bag before and after adding the object to make sure
+that the bag does not go over max capacity.
+
+With all of these foundational classes working for our searches it made the execution for Breadth-First 
+and Depth-First searches much more simple. The design of Depth-First search was to make a stack of 
+carts. Each cart as described before contains x number of sacks along with all of the unpackedItems. 
+To exercise a solution The first cart is popped off of the stack and manipulated. First the code
+checks to see if the current popped cart is a solution. If it is a solution, the DFS is done, and 
+prints the solution. If the popped cart is not a solution then copies of the cart are made equaling 
+the amount of the number of sacks i.e. if there is 4 sacks, then 4 cart copies are made. This is to
+make sure the next item is put into every bag number. Then these copies are added to the stack, and 
+the popped cart is discarded. The process keeps repeating until the stack is empty.
+
+In regards to Breadth-First search the same process is followed however it is obviously done using queue.
+instead of removing the last cart created it peeks into the first cart. The program checks to see if 
+the peeked cart is a solution, if it is not it is copied and manipulated like the DFS. If it is a 
+solution, the solution is stored and not other copies are made. Once done we then add the new manipulated 
+copies of cart objects into the queue and remove the cart being peaked at.
+
+02 Testing procedure & sample results
+-------------------------------------------------------------------------------------------------------------------------
+
+Initially testing we used the provided testing example:
+
+3                   //number of bags available
+7                   //maximum bag size is 7
+bread  3 + rolls    //1st item size
+rolls  2 + bread    //1st item size
+squash 3 - meat     //2nd item size
+meat   5            //3rd item size
+lima_beans 1 - meat //5th item size
+
+and then ran the given solution checker "deliver" to see if the solution that we produced was indeed a correct solution.
+This problem though was obviously solvable so the next steps we took to test the program were to produce testing sets 
+that were not solvable. For example: 
+
+3                  
+7                   
+item0 3 + item1    
+item1 2 + item0    
+item2 3 - item3     
+item3 2            
+item4 5 - item3 
+
+This allowed us to check the requirment of producing failure results. Before testing impossible test sets our code was not
+handling failures.
+
+Now that the base was established, being it can find simple solutions and knows when something isnt solvable. we decided to
+test the limits of the breadth first search since it is taking up a lot of memory. Using the provided baggen.tar.gz and running 
+the GroceryProbGen with extrodinary values: 
+
+java GroceryProbGen -numbags 500 -maxbagsize 15  -numitems 122 -maxitemsize 6 -minitemsize 1 -minconstraints 0 -maxconstraints 30
+
+Our program did not crash using -depth with the given output which is in our provided file "thebigone.txt". However, using breadth we ran into 
+a OutOfMemoryError while using breadth first. The error:
+
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+        at Cart.<init>(Cart.java:21)
+        at Baggins.BFS(Baggins.java:96)
+        at Driver.main(Driver.java:17)
+
+This also occured after cuttting down the amount of constriantes that the GroceryProbGen could use:
+
+Java GroceryProbGen -numbags 500 -maxbagsize 15  -numitems 122 -maxitemsize 6 -minitemsize 1 -minconstraints 0 -maxconstraints 5
+
+See "thebigone2.txt" which our depth first search could effectively handle but apparently our breadth-first search could not. After x  
+amount of printed solutions our code broke with the same OutOfMemoryError.
+
+
+since we did not see any reason why we should ever need to have this big of a grocery cart we decided to leave this. But we did want to
+make sure that the produced solutions were even valid for this kind of extrodinary test sample. Testing two solutions which we are not
+including to save on sanity and space but the solutions produced before the OutOfMemoryError occured were correct solutions. Testing it with 
+depth first search as well it prodced a correct solution.
+
+At this point we went back to simplicity and tried out the following test samples:
+
+4
+100
+item0 1
+item1 1
+item2 1 - item4 item0
+item3 1 - item2 item0 item1 item4
+item4 1 - item2 item3
+item5 1 - item2
+------------------------------------good solution!
+success
+item4   item0
+item3
+item2
+item5   item1
+
+
+7
+10
+item0 1
+item1 1
+item2 1 - item4 item0
+item3 1 - item2 item0 item1 item4
+item4 1 - item2 item3
+item5 1 - item2
+----------------------------------good solution!
+success
+item4
+item3
+item2
+item1
+item0
+item5
+
+
+3                  
+7                   
+item0 3 + item1    
+item1 2 + item0    
+item2 3 - item3     
+item3 2            
+item4 5 - item3
+---------------------failed
+xxxxxxxxxxxxxxxxx
+
+failed
+7
+5
+item0 1 - item8 item3 item4 item1 item2
+item1 4 - item4 item7 item9 item2
+item2 3 - item1 item5 item0 item9 item6
+item3 5 - item9 item5 item1 item0 item4
+item4 4 - item1 item9 item0 item3 item6
+item5 5 - item1 item2 item0 item6
+item6 6 + item0 item9
+item7 4 + item9 item0 item8
+item8 4 + item6 item4 item5 item9 item2
+item9 2 - item3
+----------------------------------------failed
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+failed
+9
+5
+item0 2 - item6 item3 item1 item7 item8
+item1 1 + item2 item5 item8 item9 item3
+item2 1 + item5
+item3 1 - item5 item8
+item4 6 + item9 item0 item2
+item5 6 + item4 item2
+item6 3 + item7 item3 item2
+item7 4 - item8 item2
+item8 5 - item6 item2
+item9 4 - item0 item5 item6
+-------------------------------failed
+xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+9
+5
+item0 1
+item1 2 - item4
+item2 2
+item3 2 + item6 item8 item9 item7 item0
+item4 2
+item5 3
+item6 2 + item9 item3 item7
+item7 1
+item8 1
+item9 1
+----------------------------------good solution
+success
+item8
+item7
+item6
+item5
+item4
+item3
+item2
+item1
+item9   item0
