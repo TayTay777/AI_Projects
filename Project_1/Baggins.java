@@ -50,6 +50,7 @@ public class Baggins {
 
                 }
 
+				
                 //checks to make sure item will fit in sack number 'i'
 			    if (sCart.addItem(i, sCart.unpackedItems.get(sCart.unpackedItems.size()-1))){
                     //for loop for going through every sack in sCart
@@ -81,16 +82,31 @@ public class Baggins {
 		int numSacks = bfsItems.numSacks;
 
 
-		Cart bfsCart = new Cart(items, numSacks, bfsItems.sackSize);
+		//Cart bfsCart = new Cart(items, numSacks, bfsItems.sackSize);
 
 		Queue<Cart> bfsQueue = new LinkedList<>();
 
 
+
+		/*Starts the queue with the same item in each bag.
+		*Example:
+		*2
+		*4
+		*item0 2
+		*item1 2
+		*item2 2
+		*
+		*item2, being at the back of the item list, would be put 
+		*into 3 different carts, each time being put in a different bag
+		*This puts the item2 in every possible place it could be.
+		*/
+
+
 		//Start the queue
-		for (int i = 0; i < bfsCart.sacks.size(); i++){
+		for (int i = 0; i < numSacks; i++){
 			Cart startCart = new Cart(items, numSacks, bfsItems.sackSize);
 
-			//items are removed from back
+			//items are removed from back of item list
 			if (startCart.addItem(i, items.get(items.size()-1))){
 				bfsQueue.add(startCart);
 			}
@@ -98,18 +114,25 @@ public class Baggins {
 
 
 		while(!bfsQueue.isEmpty()){
-			for (int i = 0; i < bfsCart.sacks.size(); i++){
+			//Adds an unpacked item into the cart 
+			//places this same item into every possible sack
+			//making a new copy for every possible sack
+			for (int i = 0; i < numSacks; i++){
 				Cart queCart = bfsQueue.peek();
 				Cart newCart = new Cart(items, numSacks, bfsItems.sackSize);
 
 				if (queCart.solution()){
 					solved = true;
 					queCart.printGroceries();
-					break;
+					//break;
 				}
 
 				//checks to make sure item will fit in sack number 'i'
-				if (queCart.addItem(i, queCart.unpackedItems.get(queCart.unpackedItems.size()-1))){
+				//If it can, it's added, then the contents are copied to
+				//a new Cart called newCart. Afterwards the queCart is removed
+				//once all the other sacks from the first for loop (i) are checked.
+				//changed if to else if
+				else if (queCart.addItem(i, queCart.unpackedItems.get(queCart.unpackedItems.size()-1))){
 					//for loop for going through every sack in queCart
 					for (int z = 0; z < numSacks; z++) {
 						//for loop for going through every item in a sack from queCart
@@ -119,9 +142,13 @@ public class Baggins {
 						}
 					}
 					//Adds Copied cart into queue
+					//Only if an item can be added, 
+					//will a new copy be 
+					//made and then added into this queue
 					bfsQueue.add(newCart);
 				}
 			}
+			//here is where queCart is removed.
 			bfsQueue.remove();
 		}
 		if(!solved){
