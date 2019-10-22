@@ -19,6 +19,11 @@ public class Sack {
 			openSpace = openSpace - item.itemSize;
 		}
 
+		void removeItem(Item item){
+			contents.remove(item);
+			openSpace = openSpace + item.itemSize;
+		}
+
 		// returns size of current bag
 		public int getSize() {
 			return maxSize;
