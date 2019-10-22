@@ -83,6 +83,26 @@ public class Cart {
 		}
 	}
 
+	boolean solutionLS(){
+
+		for (int i = 0; i < sacks.size(); i++){
+			if (sacks.get(i).openSpace < 0){
+				return false;
+			}
+			for (int z = 0; z < sacks.get(i).contents.size(); z++){
+				for (int x = 0; x < sacks.get(i).contents.size(); x++){
+					if (sacks.get(i).contents.get(z) != sacks.get(i).contents.get(x)){
+						if (!sacks.get(i).contents.get(z).checkCompatible(sacks.get(i).contents.get(x))){
+							return false;
+						}
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
 	boolean isConflicted(int sackNum) {
 		boolean conflicted = false;
 		if (sacks.get(sackNum).openSpace < 0) {
@@ -130,7 +150,7 @@ public class Cart {
 		} else {
 
 			for (int z = 0; z < sacks.get(sackNum).contents.size(); z++) {
-				if (conflictTypeIncompatibleFound){
+				if (conflictTypeIncompatibleFound) {
 					break;
 				}
 				for (int w = 0; w < sacks.get(sackNum).contents.size(); w++) {
@@ -145,7 +165,79 @@ public class Cart {
 			}
 		}
 
+		// removes item
+		sacks.get(sackNum).contents.remove(returnedItem);
+		// adds item back to unpacked items
+		unpackedItems.add(returnedItem);
 		return returnedItem;
+	}
+
+	void addConflict(int sackNum, Item addedItem) {
+		int openSpace = -999;
+		int incompatibleOpenSpace = 0;
+		int sackToAddForOpenSpace = 0;
+		int incompatibleCount = 999;
+		int bagIncompatibleCount;
+		int sackToAddForIncompatible = 0;
+		boolean incompatible = false;
+
+		for (int i = 0; i < sacks.size(); i++) {
+			if (i != sackNum) {
+				for (int z = 0; z < sacks.get(i).contents.size(); z++) {
+					if (sacks.get(i).contents.get(z).itemSize - addedItem.itemSize > openSpace) {
+						openSpace = sacks.get(i).contents.get(z).itemSize - addedItem.itemSize;
+						sackToAddForOpenSpace = i;
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < sacks.size(); i++) {
+			bagIncompatibleCount = 0;
+			if (i != sackNum) {
+				for (int z = 0; z < sacks.get(i).contents.size(); z++){
+					if (!sacks.get(i).contents.get(z).checkCompatible(addedItem)){
+						bagIncompatibleCount = bagIncompatibleCount + 1;
+						if (z == sacks.get(i).contents.size()-1){
+							if (bagIncompatibleCount < incompatibleCount){
+								incompatibleCount = bagIncompatibleCount;
+								sackToAddForIncompatible = i;
+								incompatibleOpenSpace = sacks.get(i).contents.get(z).itemSize - addedItem.itemSize;
+								incompatible = true;
+							}
+							else if (bagIncompatibleCount == incompatibleCount){
+								if (incompatibleOpenSpace > sacks.get(i).contents.get(z).itemSize - addedItem.itemSize){
+									incompatibleCount = bagIncompatibleCount;
+									sackToAddForIncompatible = i;
+									incompatibleOpenSpace = sacks.get(i).contents.get(z).itemSize - addedItem.itemSize;
+									incompatible = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// incompatible has priority
+		if (incompatible){
+			// choose this sack index to add to
+			if (sackToAddForOpenSpace == sackToAddForIncompatible){
+				addItemLS(sackToAddForIncompatible, addedItem);
+			}
+			
+			
+			// add to sack incompatible sack over too full sack
+			else if (sackToAddForIncompatible != sackToAddForOpenSpace){
+				addItemLS(sackToAddForIncompatible, addedItem);
+			}
+
+		}
+		// add to sack with highest openSpace
+		else {
+			addItemLS(sackToAddForOpenSpace, addedItem);
+		}
+
 	}
 
 	// This will print one solution

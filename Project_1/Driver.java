@@ -32,6 +32,14 @@ class Driver {
             //Prints BFS Solutions
             DFSSolutions.DFS();
         }
+        else if (args[1].equals("-local")){
+            Baggins LSSolution = new Baggins(file);
+
+            LSSolution.LS();
+        }
+
+
+
         else System.out.println("Error: Second argument must be \"-depth\" or \"-breadth\"");
 
     }

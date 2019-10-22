@@ -32,27 +32,30 @@ public class Baggins {
 		for (int i = 0; i < items.size(); i++) {
 			Random rand = new Random();
 			int randomSackNum = rand.nextInt(numSacks);
-			lsCart.addItem(randomSackNum, lsCart.unpackedItems.remove(items.size() - (i + 1)));
+			lsCart.addItemLS(randomSackNum, lsCart.unpackedItems.remove(items.size() - (i + 1)));
 		}
 
 		while (!solution) {
 			// Randomly picks a sack for a conflict
 			Random rand = new Random();
 			int randomSack = rand.nextInt(numSacks);
+			Item conflictedItem;
 			
 			
 			if (lsCart.isConflicted(randomSack)){
 				// removes incompatible items
-				//TODO: remove conflicted item from cart items
-				lsCart.removeConflict(randomSack);
-				
+				conflictedItem = lsCart.removeConflict(randomSack);
+
+				lsCart.addConflict(randomSack, conflictedItem);
 			}
 
 			// checks if cart is a solution
-			
-
+			if (lsCart.solutionLS()){
+				System.out.println("Solution made!");
+				lsCart.printGroceries();
+				solution = true;
+			}
 		}
-
 	}
 
 	void DFS() {
