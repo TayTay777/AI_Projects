@@ -22,11 +22,12 @@ public class Baggins {
 
 	void LS() {
 
+		boolean solution = false;
 		Items lsItems = new Items(file);
 		ArrayList<Item> items = lsItems.createItems();
 		int numSacks = lsItems.numSacks;
 		Cart lsCart = new Cart(items, numSacks, lsItems.sackSize);
-		boolean solution = false;
+		int randRestart = 0;
 
 		// initializes the cart by placing items into a random sack
 		for (int i = 0; i < items.size(); i++) {
@@ -35,13 +36,41 @@ public class Baggins {
 			lsCart.addItemLS(randomSackNum, lsCart.unpackedItems.remove(items.size() - (i + 1)));
 		}
 
+
+		if (lsCart.solutionLS()){
+			System.out.println("Solution made!");
+			lsCart.printGroceries();
+			solution = true;
+		}
+
+
+
 		while (!solution) {
+			
+			if (randRestart == 100) {
+				lsCart = new Cart(items, numSacks, lsItems.sackSize);
+				randRestart = 0;
+
+				// initializes the cart by placing items into a random sack
+				for (int i = 0; i < items.size(); i++) {
+					Random rand = new Random();
+					int randomSackNum = rand.nextInt(numSacks);
+					lsCart.addItemLS(randomSackNum, lsCart.unpackedItems.remove(items.size() - (i + 1)));
+				}
+
+
+				if (lsCart.solutionLS()){
+					System.out.println("Solution made!");
+					lsCart.printGroceries();
+					solution = true;
+				}
+			}
 			// Randomly picks a sack for a conflict
 			Random rand = new Random();
 			int randomSack = rand.nextInt(numSacks);
 			Item conflictedItem;
-			
-			
+
+
 			if (lsCart.isConflicted(randomSack)){
 				// removes incompatible items
 				conflictedItem = lsCart.removeConflict(randomSack);
@@ -51,10 +80,12 @@ public class Baggins {
 
 			// checks if cart is a solution
 			if (lsCart.solutionLS()){
-				System.out.println("Solution made!");
+				System.out.println("Solution made!\n");
 				lsCart.printGroceries();
 				solution = true;
 			}
+			
+			randRestart++;
 		}
 	}
 
