@@ -9,7 +9,7 @@ then
 	echo "failure"
 	exit 
 else
-	javac Driver.java
+	javac *.java
 	java Driver "$1" "$2"
 fi
 

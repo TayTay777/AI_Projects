@@ -53,9 +53,6 @@ public class Baggins {
 					temp.printGroceries();
 					System.exit(0);
 				} else {
-
-					
-
 					// for all the items
 					for (Item foo : temp.unpackedItems) {
 						// check to see if item fits in sack
