@@ -37,6 +37,10 @@ class Driver {
 
             LSSolution.LS();
         }
+        else if (args[1].equals("-arc")){
+            Baggins arcSolution = new Baggins(file);
+
+        }
 
         else {
             Baggins MRVSolution = new Baggins(file);
