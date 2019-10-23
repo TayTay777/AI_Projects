@@ -23,7 +23,7 @@ public class Cart {
 		unpackedItems = new ArrayList<Item>(items);
 		sacks = new ArrayList<Sack>(numSacks);
 		for (int i = 0; i < numSacks; i++)
-			sacks.add(new Sack(maxSackSize));
+			sacks.add(new Sack(maxSackSize, i));
 	}
 
 	// Tries to add an item to specified sack

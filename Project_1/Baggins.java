@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
@@ -19,6 +20,119 @@ public class Baggins {
 		this.file = file;
 
 	}
+
+	public void MRV() {
+		boolean solved = false;
+		Items mrvItems = new Items(file);
+		ArrayList<Item> items = mrvItems.createItems();
+		int numSacks = mrvItems.numSacks;
+
+		Cart mrvCart = new Cart(items, numSacks, mrvItems.sackSize);
+		Stack<Cart> mrvStack = new Stack<Cart>();
+
+		// create a priority queue that is able to compare the MRV values (g to l)
+		PriorityQueue<Item> findMRV = new PriorityQueue<Item>(mrvCart.unpackedItems.size(), new itemComp());
+		// create a seocndary priority queue is able to compare LVC values (l to g)
+		PriorityQueue<Sack> findLCV = new PriorityQueue<Sack>(numSacks, new sackComp());
+
+		for (int i = 0; i < mrvCart.sacks.size(); i++) {
+			Cart startCart = new Cart(items, numSacks, mrvItems.sackSize);
+
+			if (startCart.canAdd(i, items.get(items.size() - 1))) {
+				mrvStack.push(startCart);
+			}
+		}
+		while (!mrvStack.isEmpty()) {
+			for (int x = 0; x < mrvCart.sacks.size(); x++) {
+
+				Cart temp = mrvStack.peek(); // getting top cart
+				Cart newCart = new Cart(items, numSacks, mrvItems.sackSize); // will modify
+
+				if (temp.solution()) {
+					solved = true;
+					temp.printGroceries();
+					System.exit(0);
+				} else {
+
+					
+
+					// for all the items
+					for (Item foo : temp.unpackedItems) {
+						// check to see if item fits in sack
+						for (int i = 0; i < temp.sacks.size(); i++) {
+							// if item fits in sack increase its mrv size
+							if (temp.canAdd((i),(foo))) {
+								foo.MRV++;
+								//temp.sacks.get(i).LCV += 1; // this could potentially be causing problems
+							
+							}
+						}
+					}
+
+					for(Sack foo: temp.sacks ){
+						for(Item food: temp.unpackedItems){
+							if(foo.canFit(food)){
+								temp.sacks.get(foo.position).LCV++;
+							}
+						}
+					}
+				
+					// grabs current largest item
+					for (Item foo : temp.unpackedItems) {
+						findMRV.add(foo);
+					}
+					Item i = findMRV.poll();
+
+					// grabs current smallest restraint bag
+					for (Sack foo : temp.sacks) {
+					
+						findLCV.add(foo);
+					}
+					Sack k = findLCV.poll();
+
+					// copying over current peeked cart from stack
+					if (temp.addItem(k.position, i)) {
+						// for loop for going through every sack in temp
+						for (int z = 0; z < numSacks; z++) {
+							// for loop for going through every item in a sack from temp
+							for (int y = 0; y < temp.sacks.get(z).contents.size(); y++) {
+								// fills in new cart with data from temp
+								newCart.addItem(z, temp.sacks.get(z).contents.get(y));
+							}
+						}
+					
+						//reset all values MRV/LCV in newCart 
+						for(int d = 0; d< newCart.unpackedItems.size(); d++) {
+							newCart.unpackedItems.get(d).MRV = 0;
+						}
+						for(int s = 0; s< newCart.sacks.size(); s++) {
+							newCart.sacks.get(s).LCV = 0;
+						}
+						mrvStack.push(newCart);
+						findMRV.clear();
+						findLCV.clear();
+
+					}
+
+					//most constraing value and least constraining bag
+					//cannot be placed in with eachother
+					//increase LCV by 1 to mix up the cart
+					else{
+						k.LCV++;
+						findLCV.add(k);
+					}
+						
+				}
+			}
+			mrvStack.pop();
+		}
+
+		if (!solved) {
+			System.out.println("failure...");
+			System.exit(0);
+		}
+	}
+
 
 	void LS() {
 

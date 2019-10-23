@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ -z "$1" ] || [ -z "$2" ] ;
+if [ -z "$1" ] ;
 then
 	echo "failure"
 	exit 
-elif [ "$2" != "-depth" ] && [ "$2" != "-breadth" ];
+elif [ "$2" != "-depth" ] && [ "$2" != "-breadth" ] && [ "$2" != "-local" ] && [ ! -z "$2" ];
 then
 	echo "failure"
 	exit 

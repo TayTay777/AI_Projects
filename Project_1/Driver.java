@@ -38,9 +38,10 @@ class Driver {
             LSSolution.LS();
         }
 
-
-
-        else System.out.println("Error: Second argument must be \"-depth\" or \"-breadth\"");
+        else {
+            Baggins MRVSolution = new Baggins(file);
+            MRVSolution.MRV();
+        }
 
     }
         else{
