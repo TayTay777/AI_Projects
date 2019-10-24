@@ -1,0 +1,70 @@
+CS457 
+Fall 2019
+P2 - Bagging Problem 
+Hailee Kiesecker
+Taylor Roberts 
+
+The design of our new grocery bagging problem was closely derived to how we set up our previous 
+submitted program. Keeping our algorithms within the baggins class allowed us to remain organized
+while we worked through issues. The design of the most remaining values heuristic was taken at a 
+basic level. The implementation of  two PriorityQueues<>() each one having its own separate comparisons. 
+These compare methods were created in the object class to which the PriorityQueue was made of. This 
+being the items and sacks java classes. With Implementing the most remaining values heuristic we only
+focused on one of the two priority queues I called in findMRV. findMRV organizes the items into an 
+order according to their size as well as how many bags they can be placed into. This number is stored 
+as an integer variable attached to each item object that allows for us to manipulate it on a single 
+call to the item itself. After each item is given an MRV(most remaining value) integer value it is
+then placed one at a time into the priority queue where it is compared and placed according to value.
+These are all the steps taken in implementing the most remaining value heuristic for our algorithm.
+
+
+Next we focus on the secondary PriorityQueue which stores objects of type sack. This queue’s comparator
+is within the sack class and is manipulating the placement of sacks based on their least constraining values.
+These least constraining values(LCV) are stored in the individual sack object itself just like the items
+MRV value. The LCV value is calculated by taking in the sacks current open space and adding that to a 
+secondary integer which starts at 0 and gets added to whenever an object CAN be placed into the sack for
+every unpacked object and every bag. The comparator then orders this combined number from least to greatest. 
+
+
+Polling the top from each queue we stored the MRV item object and LCV sack object. Then we tested to see 
+if the item would fit within the specified sack. If it did then we will place the item into our cart and 
+copy all the contents of our cart into a new Cart which we would then clear out its priorityqueue values 
+and push the cart itself into the stack. It is very important to set the integer values containing the 
+MRV/LCV integer value over each time. Keeping it the same would not be a reflection of the current way it
+would interact with the environment. If the item object would not fit into the current sack that sack has
+failed and its lcv value is increased by one. This shows that while it is the least constraining bag it 
+does not work with the most constraining item so we should cycle to the next bag and redo the can add method.
+In this else statement we also do NOT clear out our priority queue or its values keeping it the same allows 
+the environment to be exactly the same besides changing the value of one sack by one. This is because the 
+constraint of that bag has increased. This allows us to just go into the next best LCV sack and check if 
+the MRC item can be placed inside of it.
+
+
+The overall experience with creating a search algorithm that implements both most remaining values and 
+least constraining value heuristic was not as smooth as initially thought. A lot of overthinking occured
+in what is needed to make the heuristics work correctly. An issue that occurred that ended up being how 
+a major issue was fixed was figuring out where to put the actual creation of the priority queues. Creating
+them each time we cycled through an item was a waste of time and it was making it so that regardless of if
+the item could go into the bag or not the priority queues would be reset. After those were moved to the 
+appropriate place and a lot of debugging it occurred to us that the actual carts are running into the same
+issue over and over again, which was that they could not place an item into a bag and their heuristic numbers
+were never taking that into account, so the same mistakes kept happening over and over always causing a 
+failure in the end. Not wanting to mess with how our objects were being placed we decided it would be best
+if the item could not be placed within a specified sack that the LCV would be modified to reflect that the 
+bag has failed.
+
+Our testing for our method implementing MRV and LCV is similar to how we tested the previous programming grocery
+bagging problem. We randomly generated a bunch of grocery bagging problems and placed it in the grocery bagging
+answer checker to make sure that it was indeed a solution. The downside of this implementation was that you 
+couldn't really tell if you were always maintaining MRV and LCV heuristic with larger problem sets. 
+
+Implementation of the arc consistency made it so our heuristic method could reference the MRV values of all of the 
+unpacked items in our current cart. It then compares each mrv value to see which is larger between it and its neighboring
+item. The larger MRV item is then assigned to the smaller one. this allowes them to be paired witheachother later because
+they will then be next to eachother in the priority queue. At least that was the initial idea of it. Upon further inspection
+We noticed that this Arc consisitency will never go into full effect because each time an item is placed its MRV is reset
+making our change to be with its partner no longer there. 
+
+
+
+Design/Implementation/Testing Local:
