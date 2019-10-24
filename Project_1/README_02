@@ -58,7 +58,13 @@ bagging problem. We randomly generated a bunch of grocery bagging problems and p
 answer checker to make sure that it was indeed a solution. The downside of this implementation was that you 
 couldn't really tell if you were always maintaining MRV and LCV heuristic with larger problem sets. 
 
-Implementation of the arc consistency made it so our heuristic method (middle page 2)
+Implementation of the arc consistency made it so our heuristic method could reference the MRV values of all of the 
+unpacked items in our current cart. It then compares each mrv value to see which is larger between it and its neighboring
+item. The larger MRV item is then assigned to the smaller one. this allowes them to be paired witheachother later because
+they will then be next to eachother in the priority queue. At least that was the initial idea of it. Upon further inspection
+We noticed that this Arc consisitency will never go into full effect because each time an item is placed its MRV is reset
+making our change to be with its partner no longer there. 
+
 
 
 Design/Implementation/Testing Local:
