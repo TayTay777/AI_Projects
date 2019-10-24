@@ -19,7 +19,7 @@ class Driver {
 
         if (args[1].equals("-breadth")){
 
-            Baggins BFSSolutions = new Baggins(file);
+            Baggins BFSSolutions = new Baggins(file,false);
     
             //Prints BFS Solutions
             BFSSolutions.BFS();
@@ -27,24 +27,26 @@ class Driver {
         }
         else if (args[1].equals("-depth")){
             //code for dfs goes here
-            Baggins DFSSolutions = new Baggins(file);
+            Baggins DFSSolutions = new Baggins(file,false);
     
             //Prints BFS Solutions
             DFSSolutions.DFS();
         }
         else if (args[1].equals("-local")){
-            Baggins LSSolution = new Baggins(file);
+            Baggins LSSolution = new Baggins(file, false);
 
             LSSolution.LS();
         }
-        else if (args[1].equals("-arc")){
-            Baggins arcSolution = new Baggins(file);
+        else if (args[1].equals("-slow")){
+            Baggins MRVSolution = new Baggins(file,false);
+            MRVSolution.MRV();
 
         }
 
         else {
-            Baggins MRVSolution = new Baggins(file);
-            MRVSolution.MRV();
+            Baggins arcSolution = new Baggins(file, true);
+            arcSolution.MRV();
+           
         }
 
     }

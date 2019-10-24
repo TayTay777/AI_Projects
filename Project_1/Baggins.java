@@ -15,9 +15,38 @@ import java.util.Stack;
 public class Baggins {
 
 	File file; // taking in contents of cart and restrictions
-
-	public Baggins(File file) {
+	Boolean arc;
+	public Baggins(File file, Boolean arc) {
 		this.file = file;
+		this.arc = arc;
+
+	}
+
+	public Cart ARC(Cart cart){
+		//take in the items of unpackeditems 
+		//take in their constraints 
+		for( int i = 0 ; i < cart.unpackedItems.size(); i++){
+			Item foo = cart.unpackedItems.get(i);
+			for (int j=0; j < cart.unpackedItems.size(); j++){
+				Item foo2 = cart.unpackedItems.get(j);
+				//if the items are compaible 
+				if(foo.checkCompatible(foo2)){
+					//set smallest mrv to both
+					if((foo.MRV+foo.itemSize) > (foo2.MRV+foo2.itemSize)){
+						//foo2.isSet = true;
+						foo2.MRV = foo.MRV;
+					}
+					else if((foo.MRV+foo.itemSize) < (foo2.MRV+foo2.itemSize)){
+						//foo.isSet = true;
+						foo.MRV = foo2.MRV;
+					}
+					
+				}
+				
+			}
+		}
+		//System.out.println("hello");
+		return cart;
 
 	}
 
@@ -42,7 +71,9 @@ public class Baggins {
 				mrvStack.push(startCart);
 			}
 		}
+		int hi = 0;
 		while (!mrvStack.isEmpty()) {
+			//System.out.println(hi++);
 			for (int x = 0; x < mrvCart.sacks.size(); x++) {
 
 				Cart temp = mrvStack.peek(); // getting top cart
@@ -59,33 +90,46 @@ public class Baggins {
 						for (int i = 0; i < temp.sacks.size(); i++) {
 							// if item fits in sack increase its mrv size
 							if (temp.canAdd((i),(foo))) {
-								foo.MRV++;
+								//if(!foo.isSet){
+									foo.MRV++;
+								//}
+								
 								//temp.sacks.get(i).LCV += 1; // this could potentially be causing problems
 							
 							}
 						}
 					}
 
+
+					//if arc check
+					if(arc){
+					temp = ARC(temp);
+
+					}
+
+					
+					for (Item foo : temp.unpackedItems) {
+						findMRV.add(foo);
+					}
+					// grabs current largest item
+					Item i = findMRV.poll();
+
 					for(Sack foo: temp.sacks ){
+						
 						for(Item food: temp.unpackedItems){
 							if(foo.canFit(food)){
 								temp.sacks.get(foo.position).LCV++;
 							}
 						}
 					}
-				
-					// grabs current largest item
-					for (Item foo : temp.unpackedItems) {
-						findMRV.add(foo);
-					}
-					Item i = findMRV.poll();
-
-					// grabs current smallest restraint bag
+					
 					for (Sack foo : temp.sacks) {
 					
 						findLCV.add(foo);
 					}
+					// grabs current smallest restraint bag
 					Sack k = findLCV.poll();
+
 
 					// copying over current peeked cart from stack
 					if (temp.addItem(k.position, i)) {
@@ -121,6 +165,7 @@ public class Baggins {
 						
 				}
 			}
+	
 			mrvStack.pop();
 		}
 
@@ -139,7 +184,7 @@ public class Baggins {
 		int numSacks = lsItems.numSacks;
 		Cart lsCart = new Cart(items, numSacks, lsItems.sackSize);
 		int randRestart = 0;
-
+		int hi=0;
 		// initializes the cart by placing items into a random sack
 		for (int i = 0; i < items.size(); i++) {
 			Random rand = new Random();
@@ -157,7 +202,7 @@ public class Baggins {
 
 
 		while (!solution) {
-			
+			//System.out.println(hi++);
 			if (randRestart == 100) {
 				lsCart = new Cart(items, numSacks, lsItems.sackSize);
 				randRestart = 0;
@@ -171,7 +216,7 @@ public class Baggins {
 
 
 				if (lsCart.solutionLS()){
-					System.out.println("Solution made!");
+					//System.out.println("Solution made!");
 					lsCart.printGroceries();
 					solution = true;
 				}
@@ -191,7 +236,7 @@ public class Baggins {
 
 			// checks if cart is a solution
 			if (lsCart.solutionLS()){
-				System.out.println("Solution made!\n");
+				//System.out.println("Solution made!\n");
 				lsCart.printGroceries();
 				solution = true;
 			}
@@ -216,8 +261,9 @@ public class Baggins {
 				dfsStack.push(startCart);
 			}
 		}
-
+		int hi=0;
 		while (!dfsStack.isEmpty()) {
+			System.out.println(hi++);
 			for (int i = 0; i < dfsCart.sacks.size(); i++) {
 				Cart sCart = dfsStack.peek(); // getting top cart
 				Cart newCart = new Cart(items, numSacks, dfsItems.sackSize);

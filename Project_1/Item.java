@@ -16,12 +16,14 @@ public class Item {
 		ArrayList<String> compatible = new ArrayList<String>();
 		int itemSize;
 		int MRV;
+		Boolean isSet;
 
 		public Item(String name, ArrayList<String> compatible, int itemSize) {
 			this.name = name;
 			this.compatible = compatible;
 			this.itemSize = itemSize; //domainSize
 			this.MRV =0;
+			this.isSet = false;
 		}
 		
 		 
@@ -36,6 +38,12 @@ public class Item {
 class itemComp implements Comparator<Item>{
 	@Override
 	public int compare(Item i1, Item i2) {
+	// 	if ((i1.MRV) > (i2.MRV))
+	// 	return 1;
+	// else if ((i1.MRV) < (i2.MRV))
+	// 	return -1;
+	// return 0;
+
 		if ((i1.itemSize +i1.MRV) < (i2.itemSize+i2.MRV))
 			return 1;
 		else if ((i1.itemSize +i1.MRV) > (i2.itemSize+i2.MRV))

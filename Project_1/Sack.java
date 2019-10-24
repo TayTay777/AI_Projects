@@ -8,7 +8,7 @@ public class Sack {
 	int openSpace;
 	int LCV;
 	int position;
-	boolean failed;
+	
 	ArrayList<Item> contents = new ArrayList<Item>();
 
 		// initializing bag
@@ -17,7 +17,7 @@ public class Sack {
 			openSpace = maxSize;
 			this.LCV = 0;
 			this.position = position;
-			this.failed =false;
+			
 		}
 
 		// allows program to add item into bag
@@ -52,6 +52,12 @@ class sackComp implements Comparator<Sack>{
 	 // Overriding compare()method of Comparator  
     // for descending order of LCV (l to g) 
 	public int compare(Sack s1, Sack s2) {
+	// 	if ((s1.LCV) > (s2.LCV))
+	// 	return 1;
+	// else if ((s1.LCV) < (s2.LCV))
+	// 	return -1;
+	// return 0;
+
 		if ((s1.openSpace +s1.LCV) < (s2.openSpace +s2.LCV))
 			return 1;
 		else if ((s1.openSpace +s1.LCV) > (s2.openSpace +s2.LCV))
