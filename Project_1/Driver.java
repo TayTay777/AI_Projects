@@ -15,38 +15,46 @@ class Driver {
 
         
         
+        if (args.length == 2){
+            
+            if (args[1].equals("-breadth")){
+
+                Baggins BFSSolutions = new Baggins(file,false);
         
-
-        if (args[1].equals("-breadth")){
-
-            Baggins BFSSolutions = new Baggins(file,false);
+                //Prints BFS Solutions
+                BFSSolutions.BFS();
     
-            //Prints BFS Solutions
-            BFSSolutions.BFS();
-
-        }
-        else if (args[1].equals("-depth")){
-            //code for dfs goes here
-            Baggins DFSSolutions = new Baggins(file,false);
+            }
+            else if (args[1].equals("-depth")){            
     
-            //Prints BFS Solutions
-            DFSSolutions.DFS();
-        }
-        else if (args[1].equals("-local")){
-            Baggins LSSolution = new Baggins(file, false);
+                Baggins DFSSolutions = new Baggins(file,false);
+                DFSSolutions.DFS();
 
-            LSSolution.LS();
+            }
+            else if (args[1].equals("-local")){
+    
+    
+                //long startTime = System.nanoTime();
+    
+                Baggins LSSolution = new Baggins(file, false);
+                LSSolution.LS();
+    
+                // long endTime = System.nanoTime();
+                // System.out.println((endTime - startTime) / 1000000);
+    
+    
+            }
+            else if (args[1].equals("-slow")){
+                
+                Baggins MRVLCV = new Baggins(file, false);
+                MRVLCV.MrvLcvDFS(false);
+                
+            }
         }
-        else if (args[1].equals("-slow")){
-            Baggins MRVSolution = new Baggins(file,false);
-            MRVSolution.MRV();
-
-        }
-
         else {
-            Baggins arcSolution = new Baggins(file, true);
-            arcSolution.MRV();
-           
+
+            Baggins MRVLCV = new Baggins(file, false);
+            MRVLCV.MrvLcvDFS(true);
         }
 
     }
