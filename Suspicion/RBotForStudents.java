@@ -38,14 +38,14 @@ public class RBotForStudents extends Bot
     private double calcInformationEntropyComplex(String player, GuestNameStats gns)
     {  
         double entropy=0.0;
-        //System.out.println("Calculating entropy for " + player + " " + gns.totalCount);
+        System.out.println("Calculating entropy for " + player + " " + gns.totalCount);
         for(Integer count: gns.guestNameCounts.get(player).values())
         {
             //System.out.print("" + count + ", ");
             if(count<=0) continue;
             entropy += -(((double)count)/gns.totalCount)*Math.log(((double)count)/gns.totalCount)/Math.log(2.0);
         }
-        //System.out.println("Entropy = " + entropy);
+        System.out.println("Entropy = " + entropy);
         return entropy;
     }
 
