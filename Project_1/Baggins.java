@@ -31,6 +31,7 @@ public class Baggins {
 		int numSacks = lsItems.numSacks;
 		Cart lsCart = new Cart(items, numSacks, lsItems.sackSize);
 		int randRestart = 0;
+		int restartCount = 0;
 
 		// initializes the cart by placing items into a random sack
 		for (int i = 0; i < items.size(); i++) {
@@ -50,6 +51,7 @@ public class Baggins {
 			if (randRestart == 100) {
 				lsCart = new Cart(items, numSacks, lsItems.sackSize);
 				randRestart = 0;
+				restartCount++;
 
 				// initializes the cart by placing items into a random sack
 				for (int i = 0; i < items.size(); i++) {
@@ -84,11 +86,16 @@ public class Baggins {
 			}
 
 			randRestart++;
+			if (restartCount > 100000) {
+				System.out.println("failure");
+				break;
+			}
 		}
 	}
 
 	// Boolean for turning arc consistantcy on or off
 	void MrvLcvDFS(boolean arcConsistancy) {
+		boolean solved = false;
 		long startTime = System.nanoTime();
 		Items dfsItems = new Items(file);
 		ArrayList<Item> items = dfsItems.createItems();
@@ -219,9 +226,10 @@ public class Baggins {
 						if (newCart.solution()) {
 							newCart.printGroceries();
 							solutions++;
+							solved = true;
 							long endTime = System.nanoTime();
-							System.out.println((endTime - startTime) / 1000000);
-							//System.out.println("Solutions: " + solutions);
+							// System.out.println((endTime - startTime) / 1000000);
+							// System.out.println("Solutions: " + solutions);
 							System.exit(0);
 						}
 
@@ -231,71 +239,71 @@ public class Baggins {
 
 							// if (arcConsistancy) {
 
-							// 	// in the end, this item's value must match the number
-							// 	// of unpacked items in order to be arc consistant
-							// 	int itemArcCheck = 0;
-							// 	boolean itemArcPass = false;
+							// // in the end, this item's value must match the number
+							// // of unpacked items in order to be arc consistant
+							// int itemArcCheck = 0;
+							// boolean itemArcPass = false;
 
-							// 	for (int u = 0; u < newCart.unpackedItems.size(); u++) {
+							// for (int u = 0; u < newCart.unpackedItems.size(); u++) {
 
-							// 		if (!itemArcPass) {
+							// if (!itemArcPass) {
 
-							// 			for (int q = 0; q < numSacks; q++) {
+							// for (int q = 0; q < numSacks; q++) {
 
-							// 				// Creates a brand new cart everytime an item is placed into the cart
-							// 				Cart newCartArc = new Cart(items, numSacks, dfsItems.sackSize);
+							// // Creates a brand new cart everytime an item is placed into the cart
+							// Cart newCartArc = new Cart(items, numSacks, dfsItems.sackSize);
 
-							// 				for (int t = 0; t < numSacks; t++) {
-							// 					// for loop for going through every item in a sack from sCart
-							// 					for (int w = 0; w < newCart.sacks.get(t).contents.size(); w++) {
-							// 						// fills in new cart with data from sCart
-							// 						newCartArc.addItem(t, newCart.sacks.get(t).contents.get(w));
-							// 					}
-							// 				}
+							// for (int t = 0; t < numSacks; t++) {
+							// // for loop for going through every item in a sack from sCart
+							// for (int w = 0; w < newCart.sacks.get(t).contents.size(); w++) {
+							// // fills in new cart with data from sCart
+							// newCartArc.addItem(t, newCart.sacks.get(t).contents.get(w));
+							// }
+							// }
 
-							// 				if (newCartArc.canAdd(q, newCartArc.unpackedItems.get(u))) {
+							// if (newCartArc.canAdd(q, newCartArc.unpackedItems.get(u))) {
 
-							// 					newCartArc.addItem(newCartArc.sacks.get(q),
-							// 							newCartArc.unpackedItems.get(u));
+							// newCartArc.addItem(newCartArc.sacks.get(q),
+							// newCartArc.unpackedItems.get(u));
 
-							// 					// Checks to see of all other items can still go into at lease one sack
-							// 					int itemCanStillSack = 0;
-							// 					for (int uu = 0; uu < newCartArc.unpackedItems.size(); uu++) {
+							// // Checks to see of all other items can still go into at lease one sack
+							// int itemCanStillSack = 0;
+							// for (int uu = 0; uu < newCartArc.unpackedItems.size(); uu++) {
 
-							// 						for (int tt = 0; tt < numSacks; tt++) {
+							// for (int tt = 0; tt < numSacks; tt++) {
 
-							// 							if (newCartArc.canAdd(newCartArc.sacks.get(tt),
-							// 									newCartArc.unpackedItems.get(uu))) {
+							// if (newCartArc.canAdd(newCartArc.sacks.get(tt),
+							// newCartArc.unpackedItems.get(uu))) {
 
-							// 								itemCanStillSack++;
-							// 								break;
+							// itemCanStillSack++;
+							// break;
 
-							// 							}
-							// 						}
-							// 					}
-							// 					if (itemCanStillSack == newCartArc.unpackedItems.size()) {
-							// 						itemArcCheck++;
-							// 						itemArcPass = true;
-							// 					}
+							// }
+							// }
+							// }
+							// if (itemCanStillSack == newCartArc.unpackedItems.size()) {
+							// itemArcCheck++;
+							// itemArcPass = true;
+							// }
 
-							// 				}
+							// }
 
-							// 				if(itemArcPass){
-							// 					itemArcPass = false;
-							// 					break;
-							// 				}
+							// if(itemArcPass){
+							// itemArcPass = false;
+							// break;
+							// }
 
-							// 			}
+							// }
 
-							// 		}
+							// }
 
-							// 	}
+							// }
 
-							// 	// if all items are arc consistant
-							// 	if (itemArcCheck == newCart.unpackedItems.size()) {
-							// 		// Adds to stack
-							// 		MrvLcvStack.push(newCart);
-							// 	}
+							// // if all items are arc consistant
+							// if (itemArcCheck == newCart.unpackedItems.size()) {
+							// // Adds to stack
+							// MrvLcvStack.push(newCart);
+							// }
 
 							// }
 
@@ -312,7 +320,7 @@ public class Baggins {
 
 										for (int q = 0; q < numSacks; q++) {
 
-											if (newCart.canAdd(q, newCart.unpackedItems.get(u))){
+											if (newCart.canAdd(q, newCart.unpackedItems.get(u))) {
 												itemArcCheck++;
 												break;
 											}
@@ -330,9 +338,7 @@ public class Baggins {
 								}
 
 							}
-							
-							
-							
+
 							else {
 
 								// Adds to stack
@@ -348,7 +354,9 @@ public class Baggins {
 			}
 
 		}
-
+		if (!solved) {
+			System.out.println("failure");
+		}
 	}
 
 	void DFS() {

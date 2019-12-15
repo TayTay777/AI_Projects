@@ -330,32 +330,33 @@ public class Cart {
 	}
 
 	void calLCV(Item item, Sack sack) {
-		
+
 		boolean finished = false;
 		Sack testSack = new Sack(sacks.get(0).maxSize);
 		sack.LCV = 0;
 
-		if (canAdd(sack, item)) testSack.addItem(item);
+		if (canAdd(sack, item))
+			testSack.addItem(item);
 		else {
 			sack.LCV = 0;
 			finished = true;
-		} 
+		}
 
-		if (!finished){
+		if (!finished) {
 
 			for (int z = 0; z < unpackedItems.size(); z++) {
 
-				if (item != unpackedItems.get(z)){
+				if (item != unpackedItems.get(z)) {
 
-					if (canAdd(testSack, unpackedItems.get(z))){
+					if (canAdd(testSack, unpackedItems.get(z))) {
 						sack.LCV = sack.LCV + 1;
-						//System.out.println("LCV incremented");
+						// System.out.println("LCV incremented");
 					}
 				}
 
 			}
 
 		}
-		//System.out.println("calLCV ended");
+		// System.out.println("calLCV ended");
 	}
 }

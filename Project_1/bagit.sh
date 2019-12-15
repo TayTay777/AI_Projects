@@ -1,16 +1,9 @@
 #!/bin/bash
-
-if [ -z "$1" ] ;
+if [ "$#" -eq 2 ]
 then
-	echo "failure"
-	exit 
-elif [ "$2" != "-depth" ] && [ "$2" != "-breadth" ] && [ "$2" != "-local" ] && [ ! -z "$2" ] && [ "$2" != "-slow" ];
-then
-	echo "failure"
-	exit 
-else
 	javac *.java
 	java Driver "$1" "$2"
+else
+	javac *.java
+	java Driver "$1"
 fi
-
-
