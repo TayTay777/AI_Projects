@@ -5,7 +5,7 @@ import java.io.*;
 import java.lang.reflect.*;
 
 
-public class Suspicion
+public class SuspicionTwo
 {
 /* *******************************************************/
 /* **************** data declarations ********************/
@@ -630,7 +630,7 @@ public class Suspicion
     }
 
 
-    public Suspicion(String[] args)
+    public SuspicionTwo(String[] args)
     {
         playerFileNames = new Vector<String>();
         playerDirNames = new Vector<String>();
@@ -1048,7 +1048,7 @@ public class Suspicion
         return playerIDs;
     }
 
-    public static void tabulateResults(Suspicion game, Suspicion tournResults)
+    public static void tabulateResults(SuspicionTwo game, SuspicionTwo tournResults)
     {
         BotManager bestBot=null;
         int bestScore=0;
@@ -1068,13 +1068,13 @@ public class Suspicion
 
     public static void main(String[] args) throws Exception
     {
-        Suspicion game = new Suspicion(args);
+        SuspicionTwo game = new SuspicionTwo(args);
         if(game.tournament)
         {
             game.initGameState();
             for(int x=0;x<game.numTournaments;x++)
             {
-                Suspicion tgame = new Suspicion(args);
+                SuspicionTwo tgame = new SuspicionTwo(args);
                 tgame.play();
                 System.out.println("**********************************************************");
                 System.out.println("Current game results...");
