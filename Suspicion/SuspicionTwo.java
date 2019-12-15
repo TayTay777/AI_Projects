@@ -1002,6 +1002,10 @@ public class SuspicionTwo
         initGameState();
         System.out.println("Actual player IDs: " + getPlayerIDs());        
         Iterator<BotManager> botit = bots.iterator();
+        
+        //While loop that essentially keeps making a move
+        //until a color of unclaimed gems reaches 0
+        //Uses botit to move to the next bot every while loop iteration
         while(gems[RED]>0 && gems[GREEN]>0 && gems[YELLOW]>0)
         {
             if(!botit.hasNext()) botit = bots.iterator();
@@ -1009,8 +1013,8 @@ public class SuspicionTwo
             dice1.roll();
             dice2.roll();
             String actions = bot.bot.getPlayerActions(dice1.getFace(),dice2.getFace(),bot.cards[0].getFaceValue(),bot.cards[1].getFaceValue(),board.getPlayerLocations());
-            //System.out.println(board.getPlayerLocations());
-            //System.out.println(actions);
+            System.out.println(board.getPlayerLocations());
+            System.out.println(actions);
             displayPlayerActions(bot.bot.playerName, actions, board.getPlayerLocations());
             String[] boardStates=new String[5];
             if(legalActions(bot, actions, boardStates))
