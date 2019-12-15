@@ -32,7 +32,7 @@ public class Baggins {
 		for (int i = 0; i < items.size(); i++) {
 			Random rand = new Random();
 			int randomSackNum = rand.nextInt(numSacks);
-			lsCart.addItemLS(randomSackNum, lsCart.unpackedItems.remove(items.size() - (i + 1)));
+			lsCart.addItemLS(randomSackNum, lsCart.unpackedItems.get(items.size() - (i + 1)));
 		}
 
 		while (!solution) {
