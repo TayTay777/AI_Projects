@@ -16,6 +16,50 @@ public class RBotForStudents extends Bot
 
     int[] gemCounts = new int[3];
 
+
+//@@@ Assumes all guest IDs in the player's possible list are equally probable
+    private double calcInformationEntropySimple(Player player)
+    {
+        return -Math.log(1.0/player.possibleGuestNames.size())/Math.log(2.0);
+        //return player.possibleGuestNames.size();
+    }
+
+    public double calcInformationEntropySimple()
+    {
+        double rval=0.0;
+        for(String player:otherPlayerNames)
+        {
+            rval+=calcInformationEntropySimple(players.get(player));
+        }
+
+        return rval;
+    }
+
+    private double calcInformationEntropyComplex(String player, GuestNameStats gns)
+    {  
+        double entropy=0.0;
+        //System.out.println("Calculating entropy for " + player + " " + gns.totalCount);
+        for(Integer count: gns.guestNameCounts.get(player).values())
+        {
+            //System.out.print("" + count + ", ");
+            if(count<=0) continue;
+            entropy += -(((double)count)/gns.totalCount)*Math.log(((double)count)/gns.totalCount)/Math.log(2.0);
+        }
+        //System.out.println("Entropy = " + entropy);
+        return entropy;
+    }
+
+    public double calcInformationEntropyComplex(GuestNameStats gns)
+    {
+        double rval=0.0;
+        for(String player:otherPlayerNames)
+        {
+            rval+=calcInformationEntropyComplex(player,gns);
+        }
+
+        return rval;
+    }
+
     public static class Board
     {
         public Room rooms[][];
@@ -455,7 +499,7 @@ public class RBotForStudents extends Bot
 //@@@ Tom =[red,green]
 //@@@ Nancy=[red,green]
 //@@@ 
-//@@@ you canuse the counts to remove both red and green from Fred's KB, as there
+//@@@ you can use the counts to remove both red and green from Fred's KB, as there
 //@@@ are no valid world states that assign Fred those guest ids.
 //@@@ 
     private void cleanUpZeroCountIDs(GuestNameStats stats)
@@ -489,6 +533,9 @@ public class RBotForStudents extends Bot
             }
             rval+=":";
         }
+        System.out.println("Simple assessment of information entropy: " + calcInformationEntropySimple());
+        GuestNameStats gns = calcGuestNameStats();
+        System.out.println("More complex assessment of information entropy: " + calcInformationEntropyComplex(gns));
         return rval.substring(0,rval.length()-1);
     }
 
