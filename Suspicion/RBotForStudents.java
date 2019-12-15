@@ -168,9 +168,10 @@ public class RBotForStudents extends Bot {
         public void adjustKnowledge(ArrayList<String> possibleGuests) {
             Iterator<String> it = possibleGuestNames.iterator();
             while (it.hasNext()) {
-                String g;
-                if (!possibleGuests.contains(g = it.next())) {
+                String g = it.next();
+                if (!possibleGuests.contains(g)) {
                     it.remove();
+                    System.out.println("Removed " + g);
                 }
             }
         }
