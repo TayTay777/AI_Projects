@@ -1,4 +1,5 @@
 import java.io.File;
+
 /**
  * Driver class calles baggins to run a DFS or BFS
  * 
@@ -11,43 +12,48 @@ class Driver {
     public static void main(String[] args) {
 
         File file = new File(args[0]);
-        if(file.exists()){
+        if (file.exists()) {
 
-        
-        
-        
+            if (args.length == 2) {
 
-        if (args[1].equals("-breadth")){
+                if (args[1].equals("-breadth")) {
 
-            Baggins BFSSolutions = new Baggins(file);
-    
-            //Prints BFS Solutions
-            BFSSolutions.BFS();
+                    Baggins BFSSolutions = new Baggins(file, false);
 
-        }
-        else if (args[1].equals("-depth")){
-            //code for dfs goes here
-            Baggins DFSSolutions = new Baggins(file);
-    
-            //Prints BFS Solutions
-            DFSSolutions.DFS();
-        }
-        else if (args[1].equals("-local")){
-            Baggins LSSolution = new Baggins(file);
+                    // Prints BFS Solutions
+                    BFSSolutions.BFS();
 
-            LSSolution.LS();
-        }
+                } else if (args[1].equals("-depth")) {
 
+                    Baggins DFSSolutions = new Baggins(file, false);
+                    DFSSolutions.DFS();
 
+                } else if (args[1].equals("-local")) {
 
-        else System.out.println("Error: Second argument must be \"-depth\" or \"-breadth\"");
+                    // long startTime = System.nanoTime();
 
-    }
-        else{
+                    Baggins LSSolution = new Baggins(file, false);
+                    LSSolution.LS();
+
+                    // long endTime = System.nanoTime();
+                    // System.out.println((endTime - startTime) / 1000000);
+
+                } else if (args[1].equals("-slow")) {
+
+                    Baggins MRVLCV = new Baggins(file, false);
+                    MRVLCV.MrvLcvDFS(false);
+
+                }
+            } else {
+
+                Baggins MRVLCV = new Baggins(file, false);
+                MRVLCV.MrvLcvDFS(true);
+            }
+
+        } else {
             System.out.println("failure");
-		    System.exit(0);
+            System.exit(0);
         }
     }
-
 
 }

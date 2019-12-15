@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
@@ -14,19 +15,23 @@ import java.util.Stack;
 public class Baggins {
 
 	File file; // taking in contents of cart and restrictions
+	Boolean arc;
 
-	public Baggins(File file) {
+	public Baggins(File file, Boolean arc) {
 		this.file = file;
+		this.arc = arc;
 
 	}
 
 	void LS() {
 
+		boolean solution = false;
 		Items lsItems = new Items(file);
 		ArrayList<Item> items = lsItems.createItems();
 		int numSacks = lsItems.numSacks;
 		Cart lsCart = new Cart(items, numSacks, lsItems.sackSize);
-		boolean solution = false;
+		int randRestart = 0;
+		int restartCount = 0;
 
 		// initializes the cart by placing items into a random sack
 		for (int i = 0; i < items.size(); i++) {
@@ -35,14 +40,38 @@ public class Baggins {
 			lsCart.addItemLS(randomSackNum, lsCart.unpackedItems.get(items.size() - (i + 1)));
 		}
 
+		if (lsCart.solutionLS()) {
+			System.out.println("Solution made!");
+			lsCart.printGroceries();
+			solution = true;
+		}
+
 		while (!solution) {
+			// System.out.println(hi++);
+			if (randRestart == 100) {
+				lsCart = new Cart(items, numSacks, lsItems.sackSize);
+				randRestart = 0;
+				restartCount++;
+
+				// initializes the cart by placing items into a random sack
+				for (int i = 0; i < items.size(); i++) {
+					Random rand = new Random();
+					int randomSackNum = rand.nextInt(numSacks);
+					lsCart.addItemLS(randomSackNum, lsCart.unpackedItems.remove(items.size() - (i + 1)));
+				}
+
+				if (lsCart.solutionLS()) {
+					// System.out.println("Solution made!");
+					lsCart.printGroceries();
+					solution = true;
+				}
+			}
 			// Randomly picks a sack for a conflict
 			Random rand = new Random();
 			int randomSack = rand.nextInt(numSacks);
 			Item conflictedItem;
-			
-			
-			if (lsCart.isConflicted(randomSack)){
+
+			if (lsCart.isConflicted(randomSack)) {
 				// removes incompatible items
 				conflictedItem = lsCart.removeConflict(randomSack);
 
@@ -50,15 +79,290 @@ public class Baggins {
 			}
 
 			// checks if cart is a solution
-			if (lsCart.solutionLS()){
-				System.out.println("Solution made!");
+			if (lsCart.solutionLS()) {
+				// System.out.println("Solution made!\n");
 				lsCart.printGroceries();
 				solution = true;
+			}
+
+			randRestart++;
+			if (restartCount > 100000) {
+				System.out.println("failure");
+				break;
 			}
 		}
 	}
 
+	// Boolean for turning arc consistantcy on or off
+	void MrvLcvDFS(boolean arcConsistancy) {
+		boolean solved = false;
+		long startTime = System.nanoTime();
+		Items dfsItems = new Items(file);
+		ArrayList<Item> items = dfsItems.createItems();
+		int numSacks = dfsItems.numSacks;
+		Stack<Cart> MrvLcvStack = new Stack<Cart>();
+
+		PriorityQueue<Item> MRVitems = new PriorityQueue<Item>(items.size(), new MRVComp());
+		// PriorityQueue<Sack> LCVsacks = new PriorityQueue<Sack>(numSacks, new
+		// LCVComp());
+
+		// Setting up MRV priority queue
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).MRV = numSacks;
+			MRVitems.add(items.get(i));
+		}
+
+		// Initial set-up of the stack
+		// (number of items) * (number of sacks) = states
+
+		// item with smallest MRV value is used first
+		// because we are using a stack, so the the highest
+		// MRV value will appear on top
+		int MRVitemInitSize = MRVitems.size();
+		for (int z = 0; z < MRVitemInitSize; z++) {
+
+			for (int x = 0; x < numSacks; x++) {
+
+				// New cart
+
+				Cart startCart = new Cart(items, numSacks, dfsItems.sackSize);
+				PriorityQueue<Sack> LCVsacks = new PriorityQueue<Sack>(numSacks, new LCVComp());
+
+				for (int i = 0; i < numSacks; i++) {
+					startCart.calLCV(MRVitems.peek(), startCart.sacks.get(i));
+					// System.out.println("Sack #" + i + " LCV Value: " +
+					// startCart.sacks.get(i).LCV);
+					LCVsacks.add(startCart.sacks.get(i));
+				}
+
+				// Add item to new cart, then add to stack
+				// Adding item with the smallest LCV first
+
+				int xAlias = x;
+				while (xAlias != 0) {
+					LCVsacks.remove();
+					xAlias--;
+				}
+
+				if (startCart.canAdd(LCVsacks.peek(), MRVitems.peek())) {
+
+					startCart.addItem(LCVsacks.peek(), MRVitems.peek());
+					// Adds to stack
+					MrvLcvStack.push(startCart);
+
+				}
+			}
+			MRVitems.remove();
+		}
+
+		// DFS implementation that stops after finding a solution
+		// arc consistancy can be turned on or off
+		int solutions = 0;
+
+		while (!MrvLcvStack.empty()) {
+
+			Cart poppedCart = MrvLcvStack.pop();
+			PriorityQueue<Item> MRVitemsInner = new PriorityQueue<Item>(items.size(), new MRVComp());
+
+			// Recalculates new MRV values for this iteration
+			for (int x = 0; x < poppedCart.unpackedItems.size(); x++) {
+				// Reset MRV
+				poppedCart.unpackedItems.get(x).MRV = 0;
+				// Then recalculate MRV
+				for (int zz = 0; zz < numSacks; zz++) {
+					if (poppedCart.canAdd(zz, poppedCart.unpackedItems.get(x))) {
+						poppedCart.unpackedItems.get(x).MRV++;
+					}
+				}
+
+				MRVitemsInner.add(poppedCart.unpackedItems.get(x));
+			}
+
+			// item with smallest MRV value is used first
+			// because we are using a stack, so the the highest
+			// MRV value will appear on top
+			int MRVitemInitSizeInner = MRVitemsInner.size();
+			for (int z = 0; z < MRVitemInitSizeInner; z++) {
+
+				for (int x = 0; x < numSacks; x++) {
+
+					// New cart is made then contents from top
+					// of stack cart are copied over
+					// New cart is made then contents from top
+					// of stack cart are copied over
+					Cart newCart = new Cart(items, numSacks, dfsItems.sackSize);
+
+					for (int t = 0; t < numSacks; t++) {
+						// for loop for going through every item in a sack from sCart
+						for (int w = 0; w < poppedCart.sacks.get(t).contents.size(); w++) {
+							// fills in new cart with data from sCart
+							newCart.addItem(t, poppedCart.sacks.get(t).contents.get(w));
+						}
+					}
+
+					PriorityQueue<Sack> LCVsacks = new PriorityQueue<Sack>(numSacks, new LCVComp());
+
+					// Calculates MRV of every sack
+					for (int i = 0; i < numSacks; i++) {
+						newCart.calLCV(MRVitemsInner.peek(), newCart.sacks.get(i));
+						// System.out.println("Sack #" + i + " LCV Value: " +
+						// startCart.sacks.get(i).LCV);
+						LCVsacks.add(newCart.sacks.get(i));
+					}
+
+					// Add item to new cart, then add to stack
+					// Adding item with the smallest LCV first
+
+					int xAlias = x;
+					while (xAlias != 0) {
+						LCVsacks.remove();
+						xAlias--;
+					}
+
+					if (newCart.canAdd(LCVsacks.peek(), MRVitemsInner.peek())) {
+
+						newCart.addItem(LCVsacks.peek(), MRVitemsInner.peek());
+
+						if (newCart.solution()) {
+							newCart.printGroceries();
+							solutions++;
+							solved = true;
+							long endTime = System.nanoTime();
+							// System.out.println((endTime - startTime) / 1000000);
+							// System.out.println("Solutions: " + solutions);
+							System.exit(0);
+						}
+
+						// Where state gets added to the stack
+						// arc consistency check goes here as well
+						else {
+
+							// if (arcConsistancy) {
+
+							// // in the end, this item's value must match the number
+							// // of unpacked items in order to be arc consistant
+							// int itemArcCheck = 0;
+							// boolean itemArcPass = false;
+
+							// for (int u = 0; u < newCart.unpackedItems.size(); u++) {
+
+							// if (!itemArcPass) {
+
+							// for (int q = 0; q < numSacks; q++) {
+
+							// // Creates a brand new cart everytime an item is placed into the cart
+							// Cart newCartArc = new Cart(items, numSacks, dfsItems.sackSize);
+
+							// for (int t = 0; t < numSacks; t++) {
+							// // for loop for going through every item in a sack from sCart
+							// for (int w = 0; w < newCart.sacks.get(t).contents.size(); w++) {
+							// // fills in new cart with data from sCart
+							// newCartArc.addItem(t, newCart.sacks.get(t).contents.get(w));
+							// }
+							// }
+
+							// if (newCartArc.canAdd(q, newCartArc.unpackedItems.get(u))) {
+
+							// newCartArc.addItem(newCartArc.sacks.get(q),
+							// newCartArc.unpackedItems.get(u));
+
+							// // Checks to see of all other items can still go into at lease one sack
+							// int itemCanStillSack = 0;
+							// for (int uu = 0; uu < newCartArc.unpackedItems.size(); uu++) {
+
+							// for (int tt = 0; tt < numSacks; tt++) {
+
+							// if (newCartArc.canAdd(newCartArc.sacks.get(tt),
+							// newCartArc.unpackedItems.get(uu))) {
+
+							// itemCanStillSack++;
+							// break;
+
+							// }
+							// }
+							// }
+							// if (itemCanStillSack == newCartArc.unpackedItems.size()) {
+							// itemArcCheck++;
+							// itemArcPass = true;
+							// }
+
+							// }
+
+							// if(itemArcPass){
+							// itemArcPass = false;
+							// break;
+							// }
+
+							// }
+
+							// }
+
+							// }
+
+							// // if all items are arc consistant
+							// if (itemArcCheck == newCart.unpackedItems.size()) {
+							// // Adds to stack
+							// MrvLcvStack.push(newCart);
+							// }
+
+							// }
+
+							if (arcConsistancy) {
+
+								// in the end, this item's value must match the number
+								// of unpacked items in order to be arc consistant
+								int itemArcCheck = 0;
+								boolean itemArcPass = false;
+
+								for (int u = 0; u < newCart.unpackedItems.size(); u++) {
+
+									if (!itemArcPass) {
+
+										for (int q = 0; q < numSacks; q++) {
+
+											if (newCart.canAdd(q, newCart.unpackedItems.get(u))) {
+												itemArcCheck++;
+												break;
+											}
+
+										}
+
+									}
+
+								}
+
+								// if all items are arc consistant
+								if (itemArcCheck == newCart.unpackedItems.size()) {
+									// Adds to stack
+									MrvLcvStack.push(newCart);
+								}
+
+							}
+
+							else {
+
+								// Adds to stack
+								MrvLcvStack.push(newCart);
+								// System.out.println("Cart pushed");
+
+							}
+
+						}
+					}
+				}
+				MRVitemsInner.remove();
+			}
+
+		}
+		if (!solved) {
+			System.out.println("failure");
+		}
+	}
+
 	void DFS() {
+
+		long startTime = System.nanoTime();
+
 		boolean solved = false;
 		Items dfsItems = new Items(file);
 		ArrayList<Item> items = dfsItems.createItems();
@@ -74,21 +378,25 @@ public class Baggins {
 				dfsStack.push(startCart);
 			}
 		}
-
+		int solutions = 0;
 		while (!dfsStack.isEmpty()) {
+			Cart sCart = dfsStack.pop(); // getting top cart
 			for (int i = 0; i < dfsCart.sacks.size(); i++) {
-				Cart sCart = dfsStack.peek(); // getting top cart
 				Cart newCart = new Cart(items, numSacks, dfsItems.sackSize);
 				// solution found get out
 				if (sCart.solution()) {
 					solved = true;
 					sCart.printGroceries();
+					long endTime = System.nanoTime();
+					System.out.println((endTime - startTime) / 1000000);
 					System.exit(0);
+					solutions++;
+					System.out.println(solutions);
 
 				}
 
 				// checks to make sure item will fit in sack number 'i'
-				if (sCart.addItem(i, sCart.unpackedItems.get(sCart.unpackedItems.size() - 1))) {
+				else if (sCart.canAdd(i, sCart.unpackedItems.get(sCart.unpackedItems.size() - 1))) {
 					// for loop for going through every sack in sCart
 					for (int z = 0; z < numSacks; z++) {
 						// for loop for going through every item in a sack from sCart
@@ -97,12 +405,12 @@ public class Baggins {
 							newCart.addItem(z, sCart.sacks.get(z).contents.get(x));
 						}
 					}
+					// Adds the new item
+					newCart.addItem(i, sCart.unpackedItems.get(sCart.unpackedItems.size() - 1));
 					// Adds Copied cart onto stack
 					dfsStack.push(newCart);
 				}
 			}
-
-			dfsStack.pop();
 		}
 		if (!solved) {
 			System.out.println("failure");
