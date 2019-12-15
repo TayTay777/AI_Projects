@@ -41,7 +41,7 @@ public class RBotForStudents extends Bot
         System.out.println("Calculating entropy for " + player + " " + gns.totalCount);
         for(Integer count: gns.guestNameCounts.get(player).values())
         {
-            //System.out.print("" + count + ", ");
+            System.out.print("" + count + ", ");
             if(count<=0) continue;
             entropy += -(((double)count)/gns.totalCount)*Math.log(((double)count)/gns.totalCount)/Math.log(2.0);
         }
