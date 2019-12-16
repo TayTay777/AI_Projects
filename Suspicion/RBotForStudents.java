@@ -166,6 +166,7 @@ public class RBotForStudents extends Bot {
         // Remove guest names that are not in the possibleGuests from this players list
         // of possible guest names
         public void adjustKnowledge(ArrayList<String> possibleGuests) {
+            System.out.println("ArrayList possibleGuestNames contains: " + possibleGuestNames);
             Iterator<String> it = possibleGuestNames.iterator();
             while (it.hasNext()) {
                 String g = it.next();
