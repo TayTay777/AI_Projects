@@ -280,25 +280,38 @@ public class RBotForStudents extends Bot {
 
                         if (availGem.equals("red")){
 
-                            if (smallest >= gemCounts[0]){
-                                gemAction = this.board.rooms[me.row][me.col].availableGems[z];
-                                smallest = gemCounts[0];
+                            if (getGuestsInRoomWithGem(board, "red").size() > 1){
+                                if (smallest >= gemCounts[0]){
+                                    gemAction = this.board.rooms[me.row][me.col].availableGems[z];
+                                    smallest = gemCounts[0];
+                                }
                             }
+
+                            
                         }
 
                         if (availGem.equals("green")){
 
-                            if (smallest >= gemCounts[1]){
-                                gemAction = this.board.rooms[me.row][me.col].availableGems[z];
-                                smallest = gemCounts[1];
+
+                            if (getGuestsInRoomWithGem(board, "green").size() > 1){
+
+                                if (smallest >= gemCounts[1]){
+                                    gemAction = this.board.rooms[me.row][me.col].availableGems[z];
+                                    smallest = gemCounts[1];
+                                }
+
                             }
                         }
 
                         if (availGem.equals("yellow")){
 
-                            if (smallest >= gemCounts[2]){
-                                gemAction = this.board.rooms[me.row][me.col].availableGems[z];
-                                smallest = gemCounts[2];
+                            if (getGuestsInRoomWithGem(board, "yellow").size() > 1){
+
+                                if (smallest >= gemCounts[2]){
+                                    gemAction = this.board.rooms[me.row][me.col].availableGems[z];
+                                    smallest = gemCounts[2];
+                                }
+
                             }
                         }
                     }
@@ -325,35 +338,14 @@ public class RBotForStudents extends Bot {
                 String playerAsked = otherPlayerNames[playerAskedIndex];
                 String guestAskedAbout = guestNames[r.nextInt(guestNames.length)];
 
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("Before asking, possible guests for player " + playerAsked);
-                System.out.println(" are: ");
+                /*
 
-                for (int ii = 0; ii < players.get(playerAsked).possibleGuestNames.size(); ii++){
-                    System.out.println(players.get(playerAsked).possibleGuestNames.get(ii));
-                }
+                Attempted to establish a KB here, however after running a lot of simulations
+                I found the knowledge was already established, and removing the players based
+                on the "can see?" action using answerAsk, and then editing the array of player
+                that holds all the possible guests it can be. 
 
-                System.out.println("After asking if they can see guest " + guestAskedAbout);
-                System.out.println(" the possible guests are: ");
-
-                for (int ii = 0; ii < players.get(playerAsked).possibleGuestNames.size(); ii++){
-                    System.out.println(players.get(playerAsked).possibleGuestNames.get(ii));
-                }
-
-
-                
-
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
-                System.out.println("****************************************");
+                */
 
                 actions += ":" + cardAction + playerAsked;
 
