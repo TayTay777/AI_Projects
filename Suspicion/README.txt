@@ -285,23 +285,23 @@ Calculating Branching Factor:
 ***Bot modifications***
 
 
-    Using this awesome program suite, I started focusing on using the knowledge base to make my decisions. I 
-wanted to get the simple things out of the way first, that would improve my results drastically, so I 
-researched the code to figure out how the knowledge base (score card) worked. When I starting writing code
-I thought I needed to make my own KB, but later, after running simulations, I found out I didn't need to. 
-To my surprise, the players that could be seen/not-seen from an ask action were automatically taken off
-the scorecard by means of removing players from an array that stored possible guests for each player. 
-After spending a good deal of time finding that out, I turned to gem choices. The quickest way to get 
-points in this game, as mentioned above, is to get sets. The code is currently set to pick a random gem
-when "get," followed by no color, is the card action. I changed this to pick a gem I had the least of. 
-After running test with that, I found my scores skyrocketed. After that I wanted to hide my location as 
-well. I say, there was no other players on a gem I chose, it would right away reveal my location. I utilized
-the getGuestsInRoomWithGem() method and ran a bunch of matches again. Surprising, this didn't improve my 
-scores. I ran quite a few simulations with different bot setups, and still, not using getGuestsInRoomWithGem()
-was a better choice. 
+        Using this awesome program suite, I started focusing on using the knowledge base to make my decisions. I 
+    wanted to get the simple things out of the way first, that would improve my results drastically, so I 
+    researched the code to figure out how the knowledge base (score card) worked. When I starting writing code
+    I thought I needed to make my own KB, but later, after running simulations, I found out I didn't need to. 
+    To my surprise, the players that could be seen/not-seen from an ask action were automatically taken off
+    the scorecard by means of removing players from an array that stored possible guests for each player. 
+    After spending a good deal of time finding that out, I turned to gem choices. The quickest way to get 
+    points in this game, as mentioned above, is to get sets. The code is currently set to pick a random gem
+    when "get," followed by no color, is the card action. I changed this to pick a gem I had the least of. 
+    After running test with that, I found my scores skyrocketed. After that I wanted to hide my location as 
+    well. I say, there was no other players on a gem I chose, it would right away reveal my location. I utilized
+    the getGuestsInRoomWithGem() method and ran a bunch of matches again. Surprising, this didn't improve my 
+    scores. I ran quite a few simulations with different bot setups, and still, not using getGuestsInRoomWithGem()
+    was a better choice. 
 
-    I also was considering using the entropy functions to my advantage, but everytime a ran a game with 12 
-gems, I always got 0 entropy for every player. When running the matches with 2 gems though, the entropy
-would be very useful, because there where a few 0 totalcount value guests for each player. I could have 
-easily removed those guests from the player object's possibleGuests array, but the game cannot even have
-2 gems if there is 6 players, so I put that on the back burner. 
+        I also was considering using the entropy functions to my advantage, but everytime a ran a game with 12 
+    gems, I always got 0 entropy for every player. When running the matches with 2 gems though, the entropy
+    would be very useful, because there where a few 0 totalcount value guests for each player. I could have 
+    easily removed those guests from the player object's possibleGuests array, but the game cannot even have
+    2 gems if there is 6 players, so I put that on the back burner. 
