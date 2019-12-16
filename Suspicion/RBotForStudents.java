@@ -560,10 +560,16 @@ public class RBotForStudents extends Bot {
         ArrayList<String> possibleGuests = new ArrayList<String>();
         for (String name : guestNames) {
             pieces.put(name, new Piece(name));
-            if (!name.equals(guestName))
-                possibleGuests.add(name);
         }
         me = pieces.get(guestName);
+
+
+        for (String k : pieces.keySet()) {
+            Piece guest = pieces.get(k);
+            if (me.name != guest.name){
+                possibleGuests.add(guest.name);
+            }
+        }
 
         players = new HashMap<String, Player>();
         for (String str : playerNames) {
