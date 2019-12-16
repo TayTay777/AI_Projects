@@ -288,14 +288,15 @@ public class RBotForStudents extends Bot {
                     System.out.println(players.get(playerAsked).possibleGuestNames.get(ii));
                 }
 
-                answerAsk(guestAskedAbout, playerAsked, board, true);
-
                 System.out.println("After asking if they can see guest " + guestAskedAbout);
                 System.out.println(" the possible guests are: ");
 
                 for (int ii = 0; ii < players.get(playerAsked).possibleGuestNames.size(); ii++){
                     System.out.println(players.get(playerAsked).possibleGuestNames.get(ii));
                 }
+
+
+                
 
                 System.out.println("****************************************");
                 System.out.println("****************************************");
