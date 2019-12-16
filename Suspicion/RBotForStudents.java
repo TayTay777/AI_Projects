@@ -280,7 +280,7 @@ public class RBotForStudents extends Bot {
 
                         if (availGem.equals("red")){
 
-                            if (getGuestsInRoomWithGem(board, "red").size() > 1){
+                            if (getGuestsInRoomWithGem(board, "red").size() > 0){
                                 if (smallest >= gemCounts[0]){
                                     gemAction = this.board.rooms[me.row][me.col].availableGems[z];
                                     smallest = gemCounts[0];
@@ -293,7 +293,7 @@ public class RBotForStudents extends Bot {
                         if (availGem.equals("green")){
 
 
-                            if (getGuestsInRoomWithGem(board, "green").size() > 1){
+                            if (getGuestsInRoomWithGem(board, "green").size() > 0){
 
                                 if (smallest >= gemCounts[1]){
                                     gemAction = this.board.rooms[me.row][me.col].availableGems[z];
@@ -305,7 +305,7 @@ public class RBotForStudents extends Bot {
 
                         if (availGem.equals("yellow")){
 
-                            if (getGuestsInRoomWithGem(board, "yellow").size() > 1){
+                            if (getGuestsInRoomWithGem(board, "yellow").size() > 0){
 
                                 if (smallest >= gemCounts[2]){
                                     gemAction = this.board.rooms[me.row][me.col].availableGems[z];
