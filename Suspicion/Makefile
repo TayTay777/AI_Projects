@@ -6,8 +6,7 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-	TaylorPRoberts.java \
-	Suspicion.java \
+	*.java
 
 default: classes
 
