@@ -706,7 +706,7 @@ public class Suspicion
             board.placePlayerOnBoard(new BotManager(new DummyBot("dummy" + (++x),card.getFaceValue(),0,"",foobar, foobar)),r.nextInt(3),r.nextInt(4));
         }
 
-        for(x=0;x<3;x++) gems[x] = 12 * bots.size();
+        for(x=0;x<3;x++) gems[x] = 2 * bots.size();
         //for(x=0;x<3;x++) gems[x] = 12 * bots.size();
     }
 
