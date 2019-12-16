@@ -13,8 +13,10 @@ public class RBotForStudents extends Bot {
     HashMap<String, Player> players; // Keyed off of player name
     String otherPlayerNames[];
     TextDisplay display;
+    int gemTotals[];
 
     int[] gemCounts = new int[3];
+
 
     // @@@ Assumes all guest IDs in the player's possible list are equally probable
     private double calcInformationEntropySimple(Player player) {
@@ -265,7 +267,55 @@ public class RBotForStudents extends Bot {
             } else if (cardAction.startsWith("get")) {
                 // @@@ You SHOULD replace this with code that optimizes this decision
                 if (cardAction.equals("get,")) {
-                    actions += ":get," + this.board.rooms[me.row][me.col].availableGems[r.nextInt(this.board.rooms[me.row][me.col].availableGems.length)];
+                    
+                    
+                    //actions += ":get," + this.board.rooms[me.row][me.col].availableGems[    r.nextInt(this.board.rooms[me.row][me.col].availableGems.length)     ]; //availableGems[yellow | red | green]
+
+                    int smallest = 999;
+                    String gemAction = this.board.rooms[me.row][me.col].availableGems[r.nextInt(this.board.rooms[me.row][me.col].availableGems.length)];
+                    for (int z = 0; z < this.board.rooms[me.row][me.col].availableGems.length; z++){
+                        
+                        
+                        String availGem = this.board.rooms[me.row][me.col].availableGems[z];
+
+                        if (availGem.equals("red")){
+
+                            if (smallest >= gemCounts[0]){
+                                gemAction = this.board.rooms[me.row][me.col].availableGems[z];
+                                smallest = gemCounts[0];
+                            }
+                        }
+
+                        if (availGem.equals("green")){
+
+                            if (smallest >= gemCounts[1]){
+                                gemAction = this.board.rooms[me.row][me.col].availableGems[z];
+                                smallest = gemCounts[1];
+                            }
+                        }
+
+                        if (availGem.equals("yellow")){
+
+                            if (smallest >= gemCounts[2]){
+                                gemAction = this.board.rooms[me.row][me.col].availableGems[z];
+                                smallest = gemCounts[2];
+                            }
+                        }
+                    }
+
+                    if (gemAction.equals("red")){
+                        gemCounts[0]++;
+                    }
+                    if (gemAction.equals("green")){
+                        gemCounts[1]++;
+                    }
+                    if (gemAction.equals("yellow")){
+                        gemCounts[2]++;
+                    }
+
+                    actions += ":get," + gemAction;
+
+
                 } else
                     actions += ":" + cardAction;
             } else if (cardAction.startsWith("ask")) {
@@ -570,6 +620,10 @@ public class RBotForStudents extends Bot {
             if (me.name != guest.name){
                 possibleGuests.add(guest.name);
             }
+        }
+
+        for (int z = 0; z < gemCounts.length; z++){
+            gemCounts[z] = 0;
         }
 
         players = new HashMap<String, Player>();
