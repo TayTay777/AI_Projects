@@ -5,7 +5,7 @@ import java.util.*;
  * 
  */
 
-public class RBotForStudents extends Bot {
+public class TaylorPRoberts extends Bot {
     Random r = new Random();
     HashMap<String, Piece> pieces; // Keyed off of guest name
     Board board;
@@ -595,7 +595,7 @@ public class RBotForStudents extends Bot {
         return rval.substring(0, rval.length() - 1);
     }
 
-    public RBotForStudents(String playerName, String guestName, int numStartingGems, String gemLocations,
+    public TaylorPRoberts(String playerName, String guestName, int numStartingGems, String gemLocations,
             String[] playerNames, String[] guestNames) {
         super(playerName, guestName, numStartingGems, gemLocations, playerNames, guestNames);
         display = new TextDisplay(gemLocations);
