@@ -574,12 +574,12 @@ void FindBestMove(int player)
         fprintf(stderr, "\nMaxDepth = %d \n", MaxDepth);
         fprintf(stderr, "\nvariable rval = %f \n", rval);
         //rval = MinVal(&foobar, alpha, beta, 3);
+        srand(time(0));
         if (rval > alpha)
         {
             alpha = rval;
             i = x;
         }
-        srand(time(0));
         else if (rval == alpha){
             if ((rand() % 2) == 1){
                 alpha = rval;
