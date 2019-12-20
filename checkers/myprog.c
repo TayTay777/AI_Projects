@@ -92,7 +92,7 @@ double evalBoard(char board[8][8])
         }
     }
     fprintf(stderr, "Score: %d", redsum-whitesum);
-    return redsum-whitesum;
+    return redsum - whitesum;
     
 }
 
@@ -566,8 +566,8 @@ void FindBestMove(int player)
         }
 
         PerformMove(foobar.board, foobar.movelist[x], MoveLength(foobar.movelist[x]));
-        //rval = MinVal(&foobar, alpha, beta, MaxDepth);
-        rval = MinVal(&foobar, alpha, beta, 3);
+        rval = MinVal(&foobar, alpha, beta, MaxDepth);
+        //rval = MinVal(&foobar, alpha, beta, 3);
         if (rval > alpha)
         {
             alpha = rval;
