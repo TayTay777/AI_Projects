@@ -579,9 +579,9 @@ void FindBestMove(int player)
             alpha = rval;
             i = x;
         }
-        else if (reval == alpha){
+        else if (rval == alpha){
             if ((rand() % 2) == 1){
-                apha = reval;
+                alpha = rval;
                 i = x;
             }
         }
