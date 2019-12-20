@@ -72,7 +72,7 @@ double evalBoard(char board[8][8])
                     }
                     else
                     {
-                        redsum += 1.0;
+                        redsum += 2.0;
                     }
                 }
                 // Rookie pieces
