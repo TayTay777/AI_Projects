@@ -91,7 +91,7 @@ double evalBoard(char board[8][8])
             }
         }
     }
-    fprintf(stderr, "Score: %d", redsum-whitesum);
+    //fprintf(stderr, "Score: %d", redsum-whitesum);
     return redsum - whitesum;
     
 }
@@ -577,7 +577,7 @@ void FindBestMove(int player)
 
     memcpy(bestmove, state.movelist[i], MoveLength(state.movelist[i]));
     
-    //fprintf(stderr, "Score: %d", evalboard(state.board));
+    fprintf(stderr, "Score: %d ", evalboard(state.board));
 }
 
 /* Converts a square label to it's x,y position */

@@ -54,82 +54,82 @@ void Usage(char *str)
    exit(0);
 }
 
-// void PrintBoard()
-// {
-//     int board[8][8];
-//     int x,y;
-//     char ch = 127;
-
-//     for(y=0; y<8; y++)
-//     {
-//        for(x=0; x<8; x++)
-//        {
-//            if(x%2 != y%2) {
-//                if(square[y][x].state) {
-//                    if(square[y][x].col) 
-//                    {
-//                       if(square[y][x].state == King) board[y][x] = 'B';
-//                       else board[y][x] = 'b';
-//                    }
-//                    else
-//                    {
-//                       if(square[y][x].state == King) board[y][x] = 'A';
-//                       else board[y][x] = 'a';
-//                    }
-//                } else board[y][x] = ' ';
-//            } else board[y][x] = ch;
-//            printf("%c",board[y][x]);
-//        }
-//        printf("\n");
-//     }
-// }
-
-
-void printBoard(char board[8][8])
+void PrintBoard()
 {
+    int board[8][8];
+    int x,y;
+    char ch = 127;
 
-    int y, x;
-    for (y = 0; y < 8; y++)
+    for(y=0; y<8; y++)
     {
-        for (x = 0; x < 8; x++)
-        {
-            if (x % 2 != y % 2)
-            {
-                // King pieces
-                if (king(board[y][x]))
-                {
-                    if (board[y][x] & White)
-                    {
-                        fprintf(stderr, "B");
-                    }
-                    else
-                    {
-                        fprintf(stderr, "A");
-                    }
-                }
-                // Rookie pieces
-                else if (piece(board[y][x]))
-                {
-                    if (board[y][x] & White)
-                    {
-                        fprintf(stderr, "b");
-                    }
-                    else
-                    {
-                        fprintf(stderr, "a");
-                    }
-                }
-                else
-                {
-                    fprintf(stderr, " ");
-                }
-            }
-            else
-                fprintf(stderr, " ");
-        }
-    fprintf(stderr, "\n");
+       for(x=0; x<8; x++)
+       {
+           if(x%2 != y%2) {
+               if(square[y][x].state) {
+                   if(square[y][x].col) 
+                   {
+                      if(square[y][x].state == King) board[y][x] = 'B';
+                      else board[y][x] = 'b';
+                   }
+                   else
+                   {
+                      if(square[y][x].state == King) board[y][x] = 'A';
+                      else board[y][x] = 'a';
+                   }
+               } else board[y][x] = ' ';
+           } else board[y][x] = ch;
+           printf("%c",board[y][x]);
+       }
+       printf("\n");
     }
 }
+
+
+// void printBoard(char board[8][8])
+// {
+
+//     int y, x;
+//     for (y = 0; y < 8; y++)
+//     {
+//         for (x = 0; x < 8; x++)
+//         {
+//             if (x % 2 != y % 2)
+//             {
+//                 // King pieces
+//                 if (king(board[y][x]))
+//                 {
+//                     if (board[y][x] & White)
+//                     {
+//                         fprintf(stderr, "B");
+//                     }
+//                     else
+//                     {
+//                         fprintf(stderr, "A");
+//                     }
+//                 }
+//                 // Rookie pieces
+//                 else if (piece(board[y][x]))
+//                 {
+//                     if (board[y][x] & White)
+//                     {
+//                         fprintf(stderr, "b");
+//                     }
+//                     else
+//                     {
+//                         fprintf(stderr, "a");
+//                     }
+//                 }
+//                 else
+//                 {
+//                     fprintf(stderr, " ");
+//                 }
+//             }
+//             else
+//                 fprintf(stderr, " ");
+//         }
+//     fprintf(stderr, "\n");
+//     }
+// }
 
 
 
