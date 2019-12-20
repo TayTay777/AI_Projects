@@ -1,0 +1,131 @@
+***Players.txt***
+
+With using getGuestsInRoomWithGem()
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,1750,2869,4619,16
+RBot.class3,1484,2952,4436,11
+RBot.class0,1456,2892,4348,9
+RBotDumb.class4,1400,2917,4317,7
+RBotDumb.class2,1358,2936,4294,4
+RBotDumb.class5,1386,2867,4253,3
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,1750,2831,4581,18
+RBot.class3,1456,2895,4351,11
+RBotDumb.class5,1414,2839,4253,8
+RBotDumb.class2,1337,2865,4202,5
+RBot.class0,1442,2883,4325,5
+RBotDumb.class4,1344,2840,4184,3
+[taylorproberts@onyx Suspicion]$
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,1750,2816,4566,20
+RBot.class3,1491,2864,4355,9
+RBot.class0,1512,2902,4414,6
+RBotDumb.class4,1414,2840,4254,5
+RBotDumb.class5,1414,2857,4271,5
+RBotDumb.class2,1344,2924,4268,5
+[taylorproberts@onyx Suspicion]$
+
+
+
+Without using getGuestInRoomWithGem()
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,1750,3095,4845,31
+RBot.class0,1519,2905,4424,7
+RBot.class3,1456,2829,4285,4
+RBotDumb.class2,1323,2862,4185,3
+RBotDumb.class5,1365,2835,4200,3
+RBotDumb.class4,1407,2876,4283,2
+[taylorproberts@onyx Suspicion]$
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,1750,2997,4747,27
+RBot.class0,1477,2818,4295,9
+RBotDumb.class5,1337,2891,4228,6
+RBotDumb.class2,1442,2931,4373,5
+RBotDumb.class4,1400,2908,4308,2
+RBot.class3,1484,2851,4335,1
+[taylorproberts@onyx Suspicion]$
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,1750,3043,4793,31
+RBotDumb.class2,1365,2806,4171,5
+RBot.class3,1463,2853,4316,5
+RBotDumb.class4,1337,2842,4179,4
+RBot.class0,1414,2878,4292,3
+RBotDumb.class5,1365,2812,4177,2
+[taylorproberts@onyx Suspicion]$
+
+
+***Using PlayersTest.txt***
+
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotS1.class3,1715,3013,4728,21
+RBotForStudents.class1,1750,2938,4688,16
+RBotS3.class4,1750,2782,4532,7
+RBotS4.class5,1701,2784,4485,3
+RBot.class0,1372,2836,4208,2
+RBotDumb.class2,1295,2718,4013,1
+[taylorproberts@onyx Suspicion]$
+
+50 Matches,
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,1750,2994,4744,16
+RBotS1.class3,1729,2959,4688,14
+RBotS3.class4,1750,2876,4626,11
+RBotS4.class5,1701,2803,4504,6
+RBot.class0,1407,2807,4214,2
+RBotDumb.class2,1400,2790,4190,1
+[taylorproberts@onyx Suspicion]$
+
+50 Matches, 
+
+Current tournament results...
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotS1.class3,1722,3010,4732,19
+RBotForStudents.class1,1750,2932,4682,11
+RBotS3.class4,1750,2825,4575,9
+RBotS4.class5,1729,2808,4537,8
+RBot.class0,1393,2779,4172,2
+RBotDumb.class2,1274,2748,4022,1
+[taylorproberts@onyx Suspicion]$
+
+100 Matches,
+
+PlayerName,GuessScore,GemScore,TotalScore,wins
+RBotForStudents.class1,35,62,97,1
+RBotS3.class4,35,59,94,0
+RBotS4.class5,35,59,94,0
+RBotS1.class3,35,44,79,0
+RBotDumb.class2,21,58,79,0
+RBot.class0,21,55,76,0
+
+
+
