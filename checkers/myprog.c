@@ -91,7 +91,7 @@ double evalBoard(char board[8][8])
             }
         }
     }
-    //fprintf(stderr, "Score: %d", whitesum - redsum);
+    fprintf(stderr, "Score: %d", redsum-whitesum);
     return redsum-whitesum;
     
 }
