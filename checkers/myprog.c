@@ -570,10 +570,10 @@ void FindBestMove(int player)
         }
 
         PerformMove(foobar.board, foobar.movelist[x], MoveLength(foobar.movelist[x]));
-        rval = MinVal(&foobar, alpha, beta, MaxDepth);
+        //rval = MinVal(&foobar, alpha, beta, MaxDepth);
         fprintf(stderr, "\nMaxDepth = %d \n", MaxDepth);
         fprintf(stderr, "\nvariable rval = %f \n", rval);
-        //rval = MinVal(&foobar, alpha, beta, 3);
+        rval = MinVal(&foobar, alpha, beta, 9);
         srand(time(0));
         if (rval > alpha)
         {
