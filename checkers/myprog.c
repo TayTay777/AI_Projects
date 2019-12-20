@@ -52,11 +52,9 @@ int movelist[48][12];
 
 double evalBoard(char board[8][8])
 {
-
     int y, x;
     double whitesum = 0.0;
     double redsum = 0.0;
-
 
     for (y = 0; y < 8; y++)
     {
@@ -67,6 +65,9 @@ double evalBoard(char board[8][8])
                 // King pieces
                 if (king(board[y][x]))
                 {
+
+                    fprintf(stderr, "!!!!!!!!!\n");
+                    
                     if (board[y][x] & White)
                     {
                         whitesum += 2.0;
@@ -79,6 +80,9 @@ double evalBoard(char board[8][8])
                 // Rookie pieces
                 else if (piece(board[y][x]))
                 {
+
+                    fprintf(stderr, "!!!!!!!!!\n");
+
                     if (board[y][x] & White)
                     {
                         whitesum += 1.0;
