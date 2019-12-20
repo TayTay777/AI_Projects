@@ -60,8 +60,6 @@ double evalBoard(char board[8][8])
     {
         for (x = 0; x < 8; x++)
         {
-            if (x % 2 != y % 2)
-            {
                 // King pieces
                 if (king(board[y][x]))
                 {
@@ -92,7 +90,6 @@ double evalBoard(char board[8][8])
                         redsum += 1.0;
                     }
                 }
-            }
         }
     }
     //fprintf(stderr, "Score: %d", redsum-whitesum);
