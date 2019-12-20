@@ -67,7 +67,7 @@ double evalBoard(char board[8][8])
                 {
 
                     fprintf(stderr, "!!!!!!!!!\n");
-                    
+
                     if (board[y][x] & White)
                     {
                         whitesum += 2.0;
@@ -96,6 +96,7 @@ double evalBoard(char board[8][8])
         }
     }
     //fprintf(stderr, "Score: %d", redsum-whitesum);
+    fprintf(stderr, "#########\n")
     return redsum - whitesum;
     
 }
