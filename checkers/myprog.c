@@ -570,10 +570,10 @@ void FindBestMove(int player)
         }
 
         PerformMove(foobar.board, foobar.movelist[x], MoveLength(foobar.movelist[x]));
-        //rval = MinVal(&foobar, alpha, beta, MaxDepth);
-        fprintf(stderr, "\nMaxDepth = %d \n", MaxDepth);
-        fprintf(stderr, "\nvariable rval = %f \n", rval);
-        rval = MinVal(&foobar, alpha, beta, 9);
+        rval = MinVal(&foobar, alpha, beta, MaxDepth);
+        //fprintf(stderr, "\nMaxDepth = %d \n", MaxDepth);
+        //fprintf(stderr, "\nvariable rval = %f \n", rval);
+        //rval = MinVal(&foobar, alpha, beta, 9);
         srand(time(0));
         if (rval > alpha)
         {
@@ -587,15 +587,12 @@ void FindBestMove(int player)
         //     }
         // }
 
-        fprintf(stderr, "\n\"i\" value for moveList = %d \n", i);
+        //fprintf(stderr, "\n\"i\" value for moveList = %d \n", i);
     }
 
     memcpy(bestmove, state.movelist[i], MoveLength(state.movelist[i]));
-    double test = 5.0;
-
-    fprintf(stderr, "\nPrinting double 5.0 = %f \n", test);
     
-    fprintf(stderr, "Score: %f ", evalBoard(state.board));
+    fprintf(stderr, "Score: %f \n", evalBoard(state.board));
 }
 
 /* Converts a square label to it's x,y position */
