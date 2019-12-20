@@ -580,12 +580,12 @@ void FindBestMove(int player)
             alpha = rval;
             i = x;
         }
-        else if (rval == alpha){
-            if ((rand() % 2) == 1){
-                alpha = rval;
-                i = x;
-            }
-        }
+        // else if (rval == alpha){
+        //     if ((rand() % 2) == 1){
+        //         alpha = rval;
+        //         i = x;
+        //     }
+        // }
 
         fprintf(stderr, "\n\"i\" value for moveList = %d \n", i);
     }
