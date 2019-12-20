@@ -485,11 +485,11 @@ double MaxVal(struct State *state, int alpha, int beta, int depth)
         memcpy(&foobar, state, sizeof(foobar));
         if (state->player == 1)
         {
-            foobar.player = 1;
+            foobar.player = 2;
         }
         else
         {
-            foobar.player = 2;
+            foobar.player = 1;
         }
         PerformMove(foobar.board, foobar.movelist[x], MoveLength(foobar.movelist[x]));
         rval = MinVal(&foobar, alpha, beta, depth);
@@ -578,6 +578,8 @@ void FindBestMove(int player)
             alpha = rval;
             i = x;
         }
+
+        fprintf(stderr, "\n\"i\" value for moveList = %d \n", i);
     }
 
     memcpy(bestmove, state.movelist[i], MoveLength(state.movelist[i]));
