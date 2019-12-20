@@ -582,6 +582,9 @@ void FindBestMove(int player)
     }
 
     memcpy(bestmove, state.movelist[i], MoveLength(state.movelist[i]));
+    double test = 5.0;
+
+    fprintf(stderr, "\nPrinting double 5.0 = %d \n", test);
     
     fprintf(stderr, "Score: %d ", evalBoard(state.board));
 }
