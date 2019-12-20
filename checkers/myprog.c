@@ -584,9 +584,9 @@ void FindBestMove(int player)
     memcpy(bestmove, state.movelist[i], MoveLength(state.movelist[i]));
     double test = 5.0;
 
-    fprintf(stderr, "\nPrinting double 5.0 = %d \n", test);
+    fprintf(stderr, "\nPrinting double 5.0 = %f \n", test);
     
-    fprintf(stderr, "Score: %d ", evalBoard(state.board));
+    fprintf(stderr, "Score: %f ", evalBoard(state.board));
 }
 
 /* Converts a square label to it's x,y position */
